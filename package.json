@@ -1,0 +1,30 @@
+{
+  "name": "progetto_programmazione_avanzata",
+  "version": "1.0.0",
+  "description": "Progetto di programmazione avananzata A.A. 2021/2022",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucreziAntenucci98/Progetto_Programmazione_Avanzata.git"
+  },
+  "author": "Antenucci Lucrezia e Samuele Leli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucreziAntenucci98/Progetto_Programmazione_Avanzata/issues"
+  },
+  "homepage": "https://github.com/LucreziAntenucci98/Progetto_Programmazione_Avanzata#readme",
+  "dependencies": {
+    "@types/node": "^17.0.40",
+    "dotenv": "^16.0.1",
+    "express": "^4.16.1",
+    "jsonwebtoken": "^8.5.1",
+    "sequelize": "^6.20.1",
+    "typescript": "^4.7.3"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.40"
+  }
+}
