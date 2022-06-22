@@ -39,6 +39,7 @@ Ogni azione corrisponde a una differente richiesta HTTP (GET o POST) che deve es
 
 * [VisualStudio Code](https://code.visualstudio.com/)
 * [Docker](https://docs.docker.com/)
+* [Postman](https://www.postman.com/)
 
 ## Librerie/Framework
 
@@ -79,7 +80,7 @@ Di seguito si riportano i diagrammi UML:
 
 ## Progettazione - Pattern
 
-**• factory** \
+**• factory** : \
 **• observable** \
 **• singleton** \
 **• builder** \
