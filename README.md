@@ -67,6 +67,14 @@ Get           | /stats                        |
 
 ## Progettazione - Diagrammi UML
 
+Di seguito si riportano i diagrammi UML:
+
+• Use Case Diagram 
+
+(![UMLcasid'uso](https://user-images.githubusercontent.com/86314085/175025430-2eadbd1a-3cf1-4ec9-8837-5baa92dced4d.png)
+
+
+
 ## Progettazione - Pattern
 **• factory** \
 **• observable** \
