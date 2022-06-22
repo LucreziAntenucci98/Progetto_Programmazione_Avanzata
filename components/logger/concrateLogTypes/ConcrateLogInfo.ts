@@ -1,5 +1,9 @@
 import { writeFile } from "fs";
 import {LogMsg} from "../LogMsg";
+/**
+ * Classe utilizzata per scrivere il file di log con informazioni generiche.
+ * Va a scrivere il file dulla cartella info con il formato annomesegiorno_info.log
+ */
 export class ConcrateLogInfo implements LogMsg {
     private type:string = "info";
 

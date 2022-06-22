@@ -1,6 +1,12 @@
+//Serve per configurare il file .env
 require('dotenv').config();
+//Libreria Sequelize
 import { Sequelize } from 'sequelize';
 
+/**
+ * Classe Singleton per essere sicuri di avere
+ * un'unica connessione al DataBase
+ */
 export class DatabaseSingleton {
     private static instance: DatabaseSingleton;
     

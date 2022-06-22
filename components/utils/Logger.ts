@@ -8,8 +8,9 @@ function writeLog(creator: Creator,messaggio:string) {
 }
 
 /**
- * The Application picks a creator's type depending on the configuration or
- * environment.
+ * L'applicazione seleziona il tipo di creator a seconda della configurazione 
+ * o ambiente
+ * 
  */
 export const logError = (messaggio:string) =>{
     writeLog(new LogError(),messaggio);

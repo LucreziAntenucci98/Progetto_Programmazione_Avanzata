@@ -1,6 +1,5 @@
 /**
- * The LogMsg interface declares the operations that all concrete products must
- * implement.
+ * The LogMsg interface dichiara le operazioni che possono essere fatte
  */
  export interface LogMsg {
     printMsg(msg:string)

@@ -1,8 +1,9 @@
 import {LogMsg} from "../LogMsg";
-import { open, writeFile } from 'fs';
-import { Buffer } from 'node:buffer';
+import { writeFile } from 'fs';
+
 /**
- * Concrete Products provide various implementations of the LogMsg interface.
+ * Classe utilizzata per scrivere il file di log con gli errori.
+ * Va a scrivere il file dulla cartella error con il formato annomesegiorno_error.log
  */
 export class ConcrateLogError implements LogMsg {
     private type:string = "error";
