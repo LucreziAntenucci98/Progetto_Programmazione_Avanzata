@@ -73,9 +73,7 @@ Di seguito si riportano i diagrammi UML:
 
 ![UMLcasid'uso](https://user-images.githubusercontent.com/86314085/175025430-2eadbd1a-3cf1-4ec9-8837-5baa92dced4d.png)
 
-•E-R Diagram
 
-![er](https://user-images.githubusercontent.com/86314085/175028277-ef6a99d9-d23e-4331-9c5d-de47ed00c74f.png)
 
 
 ## Progettazione - Pattern
