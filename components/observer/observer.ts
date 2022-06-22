@@ -1,37 +1,35 @@
-/**
- * The Subject interface declares a set of methods for managing subscribers.
- */
- interface Subject {
-    // Attach an observer to the subject.
+import * as AstaClass from "../models/Asta";
+interface IAsta {
+    //attaccare all'observ un argomento.
     attach(observer: Observer): void;
 
-    // Detach an observer from the subject.
+    // togliere l'observer
     detach(observer: Observer): void;
 
-    // Notify all observers about an event.
+    // notifica all'observer tutti gli eventi
     notify(): void;
 }
 
-/**
- * The Subject owns some important state and notifies observers when the state
- * changes.
- */
-export class ConcreteSubject implements Subject {
+export class OBAsta implements IAsta {
     /**
-     * @type {number} For the sake of simplicity, the Subject's state, essential
-     * to all subscribers, is stored in this variable.
+     * @type {number} variabile di stato
      */
-    public state: number;
+    public num_partecipanti: number;
+    public min_num_partecipanti:number;
+    public id_asta : number ;
+    constructor(id_asta: number ,min_num_partecipanti: number){
+        this.id_asta = id_asta;
+        this.min_num_partecipanti = min_num_partecipanti;
+        this.num_partecipanti = 0;
+    }
 
     /**
-     * @type {Observer[]} List of subscribers. In real life, the list of
-     * subscribers can be stored more comprehensively (categorized by event
-     * type, etc.).
+     * @type {Observer[]} lista dei subscribers. 
      */
     private observers: Observer[] = [];
 
     /**
-     * The subscription management methods.
+     * Implementiamo l'interfaccia e inseriamo l'observer al subject
      */
     public attach(observer: Observer): void {
         const isExist = this.observers.includes(observer);
@@ -54,7 +52,7 @@ export class ConcreteSubject implements Subject {
     }
 
     /**
-     * Trigger an update in each subscriber.
+     * Viene notificato a tutti gli observer che quello stato è cambiato
      */
     public notify(): void {
         console.log('Subject: Notifying observers...');
@@ -62,65 +60,40 @@ export class ConcreteSubject implements Subject {
             observer.update(this);
         }
     }
-
-    /**
-     * Usually, the subscription logic is only a fraction of what a Subject can
-     * really do. Subjects commonly hold some important business logic, that
-     * triggers a notification method whenever something important is about to
-     * happen (or after it).
-     */
-    public someBusinessLogic(): void {
+    public AggiuntaPartecipante(): void {
         console.log('\nSubject: I\'m doing something important.');
-        this.state = Math.floor(Math.random() * (10 + 1));
+        this.num_partecipanti += 1;
 
-        console.log(`Subject: My state has just changed to: ${this.state}`);
+        console.log(`Subject: My state has just changed to: ${this.num_partecipanti}`);
         this.notify();
     }
-}
 
+}
 /**
- * The Observer interface declares the update method, used by subjects.
+ * L'interfaccia dichiare l'aggiornamento del metodo
  */
-interface Observer {
+ interface Observer {
     // Receive update from subject.
-    update(subject: Subject): void;
+    update(subject: IAsta): void;
 }
 
 /**
- * Concrete Observers react to the updates issued by the Subject they had been
- * attached to.
+ * L'observer reagisce all'evento che si è appena verificato
  */
-export class ConcreteObserverA implements Observer {
-    public update(subject: Subject): void {
-        if (subject instanceof ConcreteSubject && subject.state < 3) {
+ export class RaggiungimentoPartecipanti implements Observer {
+    public update(subject: IAsta ): void {
+        if (subject instanceof OBAsta && subject.num_partecipanti === subject.min_num_partecipanti) {
             console.log('ConcreteObserverA: Reacted to the event.');
+        
+                AstaClass.Asta.update(
+                  {stato: "rilancio"},
+                  {where:{"id_asta": subject.id_asta} }
+                )
+                .then(function() {
+                    console.log("Asta in fase di rilancio")
+                });
+                
+               
         }
     }
 }
-
-export class ConcreteObserverB implements Observer {
-    public update(subject: Subject): void {
-        if (subject instanceof ConcreteSubject && (subject.state === 0 || subject.state >= 2)) {
-            console.log('ConcreteObserverB: Reacted to the event.');
-        }
-    }
-}
-
-/**
- * The client code.
- */
-
-const subject = new ConcreteSubject();
-
-const observer1 = new ConcreteObserverA();
-subject.attach(observer1);
-
-const observer2 = new ConcreteObserverB();
-subject.attach(observer2);
-
-subject.someBusinessLogic();
-subject.someBusinessLogic();
-
-subject.detach(observer2);
-
-subject.someBusinessLogic();

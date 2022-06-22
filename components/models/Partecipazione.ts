@@ -2,6 +2,7 @@ import { DatabaseSingleton } from "./singleton/DatabaseSingleton";
 import { DataTypes, Model, Op, Sequelize } from 'sequelize';
 import { checkUserExistence, User } from "./User";
 import { Asta, checkAstaExistence } from "./Asta";
+import { subjectList } from "../..";
 
 const sequelize: Sequelize = DatabaseSingleton.getInstance().getConnessione();
 
@@ -101,7 +102,9 @@ export async function validatorInsertPartecipazione(partecipazione:any):Promise<
     if(partecipazioneObj.length != 0) return new Error("L'utente è gia iscritto");
 
     //Safe zone
-    await Asta.increment(['num_attuale_partecipanti'],{by: 1,where:{id_asta: asta.id_asta}});
+    await Asta.increment(['num_attuale_partecipanti'],{by: 1,where:{id_asta: asta.id_asta}}).then(() => { 
+        subjectList[asta.id_asta-1].AggiuntaPartecipante();
+    });
     await User.decrement(['credito'],{by: asta.quota_partecipazione,where:{username: user.username}});
     
     return true;

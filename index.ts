@@ -4,6 +4,13 @@ import * as sendResponses from "./components/utils/sendResponses"
 import * as auth from './components/middleware/middlewareAuth'
 import * as express from "express";
 import {errorHandler} from "./components/middleware/middlewareErrorHandler";
+import {OBAsta} from "./components/observer/observer"
+import {RaggiungimentoPartecipanti} from "./components/observer/observer"
+/**
+ * Sequenza codice
+ */
+
+export let subjectList: Array<OBAsta> = [];
 
 // Costanti
 const PORT = 8080;

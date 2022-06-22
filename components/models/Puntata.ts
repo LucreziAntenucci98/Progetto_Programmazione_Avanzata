@@ -63,8 +63,7 @@ export async function validatorInsertPuntata(partecipazione:any):Promise<any>{
     });
 
     if(!asta) return new Error("L'asta non esiste");
-    if(asta.stato !== "aperta" ) return new Error("L'asta non è in fase di rilancio"); //sarebbe rilancio 
-
+    
     const partecipazioneObj = await checkPartecipazioneExistence(partecipazione).then((partecipazione:any) => { 
         if(partecipazione) return partecipazione;
         else return false;
@@ -73,6 +72,8 @@ export async function validatorInsertPuntata(partecipazione:any):Promise<any>{
     if(!partecipazioneObj)  return new Error("L'utente non è un partecipante dell'asta");
     if(partecipazioneObj.length < 1) return new Error("L'utente non è un partecipante dell'asta");
     if(partecipazioneObj[0].contatore_puntate == asta.max_n_puntate_partecipante) return new Error("L'utente ha raggiunto il numero di puntate massimo");
+
+    if(asta.stato !== "rilancio" ) return new Error("L'asta non è in fase di rilancio"); 
 
     let resp = await Puntata.findAll({
         where: {

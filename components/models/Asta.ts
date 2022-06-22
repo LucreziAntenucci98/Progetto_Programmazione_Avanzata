@@ -1,7 +1,8 @@
 import { DatabaseSingleton } from "./singleton/DatabaseSingleton";
 import { DataTypes, Sequelize } from 'sequelize';
 import * as User from "./User";
-
+import { OBAsta, RaggiungimentoPartecipanti } from "../observer/observer";
+import { subjectList } from "../../index";
 const sequelize: Sequelize = DatabaseSingleton.getInstance().getConnessione();
 
 /**
@@ -76,8 +77,12 @@ export const Asta = sequelize.define('asta',
     timestamps: false,
     freezeTableName: true,
     hooks:{
-        afterCreate: async (record, options) => {
+        afterCreate: async (record:any, options) => {
             await record.update({ 'stato': 'aperta' });
+            const subject1 = new OBAsta(record.id_asta,record.min_partecipanti);
+            subjectList.push(subject1)
+            const observer = new RaggiungimentoPartecipanti();
+            subjectList[record.id_asta-1].attach(observer);
         },
         afterUpdate: (record:any,options) => {
             if(record.stato === "rilancio"){

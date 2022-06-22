@@ -1,0 +1,147 @@
+#CREAZIONE ASTA
+
+curl -X POST -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9jcmVhdG9yIjoiYW5kcmVhX2ZlbGljZXR0aSIsIm5vbWVfb2dnZXR0byI6InByb3ZhIiwibWluX3BhcnRlY2lwYW50aSI6MiwibWF4X3BhcnRlY2lwYW50aSI6MTUsInF1b3RhX3BhcnRlY2lwYXppb25lIjo1LCJkdXJhdGFfYXN0YV9taW51dGkiOjIwLCJpbmNyZW1lbnRvX3B1bnRhdGEiOjUsIm1heF9uX3B1bnRhdGVfcGFydGVjaXBhbnRlIjoyLCJtYXhfcHJlenpvX2FzdGEiOjEwfQ.hNtG4Ae7Y_RA1-Xn1BvRsBYlHNSStGyesQgJ_scHnJo" localhost:8080/creaAsta
+
+key:secretkey
+
+Esempio PayLoad valido inserimento asta:
+
+{
+    "username_creator": "andrea_felicetti",
+    "nome_oggetto": "prova",
+    "min_partecipanti": 2,
+    "max_partecipanti": 15,
+    "quota_partecipazione": 5,
+    "durata_asta_minuti": 20,
+    "incremento_puntata": 5,
+    "max_n_puntate_partecipante": 2,
+    "max_prezzo_asta": 10
+}
+
+#PARTECIPAZIONE Asta
+id=2
+
+curl -X POST -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6Mn0.KefNqZXgSn1nj_ZqvpLhJUyOG8S3nWaQcesYWV4nD6k" localhost:8080/partecipaAsta
+
+id=1
+
+curl -X POST -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII" localhost:8080/partecipaAsta
+
+key:secretkey
+
+Esempio PayLoad valido partecipazione asta:
+
+{
+    "username": "sam_leli",
+    "id_asta": 1
+}
+
+curl -X POST -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjF9.aeL0PZvTeqCamhg51Y6p_DfTH5aLzgbq68rgrL7PahY" localhost:8080/partecipaAsta
+
+{
+    "username": "lucrezia_antenucci",
+    "id_asta": 1
+}
+
+#GESTIONE RILANCI
+
+id=1
+
+curl -X POST -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII" localhost:8080/rilancia
+
+Esempio PayLoad valido rilancio asta:
+
+{
+    "username": "sam_leli",
+    "id_asta": 1
+}
+
+
+#GESTIONE RICARICA ricaricaUtente
+
+curl -X POST -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9hZG1pbiI6ImFkbWluIiwidXNlcm5hbWVfZGVzdGluYXRhcmlvIjoic2FtX2xlbGkiLCJxdWFudGl0YSI6MjAwfQ.VJY54ZYYGvcUz3PaU5OxwE0bJlxxOk3kuZO-gfGQqRA" localhost:8080/ricaricaUtente
+
+Esempio PayLoad valido inserimento asta:
+
+{
+    "username_admin":"admin",
+    "username_destinatario":"sam_leli",
+    "quantita":200
+}
+
+#GESTIONE GET CREDITO
+
+username: sam_leli
+
+curl -X GET -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIn0.zYWBd7lBhdu2ApNkdofgbxKX3f-qwhWbf0sqSzh-NkI" localhost:8080/verificaCreditoResiduo
+
+error: sam_lel
+
+curl -X GET -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWwifQ.8VLDQCIlATIcxz8rMU4hnSz0d3pEIIaYwFKS2iDGbsc" localhost:8080/verificaCreditoResiduo
+
+Esempio PayLoad valido inserimento asta:
+
+{
+    "username":"sam_leli",
+}
+
+
+#VISUALIZZA ELENCO RILANCI
+
+
+"username":"andrea_felicetti":
+
+curl -X GET -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkiLCJpZF9hc3RhIjoxfQ.TKpReZ9OvWkWpt8OKAmJYYd09k7DjHQ7zz10MXKiSwc" localhost:8080/elencoRilanci
+
+Esempio PayLoad valido elenco rilanci (bid creator)
+
+{
+    "username":"andrea_felicetti",
+    "id_asta":1
+}
+
+"username":"sam_leli":
+
+curl -X GET -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII" localhost:8080/elencoRilanci
+
+
+Esempio PayLoad valido elenco rilanci (bid partecipant)
+
+{
+    "username":"sam_leli",
+    "id_asta":1
+}
+
+#VISUALIZZA ASTE FILTRATE BY STATO - PUBLIC
+
+curl -X GET localhost:8080/VisualizzaAsteByStato?stato=aperta
+
+#storico aste
+
+username: sam_leli
+
+curl -X GET -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIn0.zYWBd7lBhdu2ApNkdofgbxKX3f-qwhWbf0sqSzh-NkI" localhost:8080/storicoAste
+
+Esempio PayLoad valido inserimento asta:
+
+{
+    "username":"sam_leli",
+}
+
+#spese effettuate
+
+username: sam_leli
+
+curl -X GET -H "Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiZGF0YV9pbml6aW8iOiIyMDIyLTA2LTIwVDEyOjAwOjAwKzAxOjAwIiwiZGF0YV9maW5lIjoiMjAyMi0wNi0yMFQxNzowMDowMCswMTowMCJ9.Z0osX0pDc4YBYVEqIklxndDUg9-CpZykjwT3NpNd2tQ" localhost:8080/speseEffettuate
+
+Esempio PayLoad valido inserimento asta:
+
+{
+    "username":"sam_leli",
+    "data_inizio": "2022-06-20T12:00:00+01:00",
+    "data_fine": "2022-06-20T17:00:00+01:00"
+}
+
+
+
+
