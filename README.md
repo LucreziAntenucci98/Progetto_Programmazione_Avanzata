@@ -63,34 +63,36 @@ Get           | /speseEffettuate              | si
 Get           | /stats                        | si
 Get           | /VisualizzaAsteByStato        | no
 
-## Uso delle rotte
-
-
 
 ## Progettazione - Diagrammi UML
 
-Di seguito si riportano i diagrammi UML:
+Di seguito si riporta il diagramma UML:
 
 • Use Case Diagram 
 
-![UMLcasid'uso](https://user-images.githubusercontent.com/86314085/175025430-2eadbd1a-3cf1-4ec9-8837-5baa92dced4d.png)
+![image](https://user-images.githubusercontent.com/86314085/175553609-be9d791e-bb90-4b52-8241-e2ace81a748e.png)
 
+• Sequence Diagram
 
 ## Progettazione - Pattern
 
-**• Factory** : fa parte della famiglia dei pattern creazionali in quanto fornisce il modo migliore per creare un'eggetto. Creiamo oggetti senza passare per il client utilizzando un interfaccia comune.
+**• Factory** : fa parte della famiglia dei pattern creazionali, in quanto fornisce ilmiglior modo per creare un'eggetto. 
+Creiamo oggetti senza passare per il client utilizzando un interfaccia comune.
 Abbiamo 4 classi:
- *- Creator: contiene il factorymethod * \
- *- ConcreteCreator: fa ritornare l'oggetto * \
- *- Product: definisce l'interfaccia * \
- *- ConcreateProduct: implementa l'oggetto definito da product* \
+ * Creator: contiene il factorymethod 
+ * ConcreteCreator: fa ritornare l'oggetto 
+ * Product: definisce l'interfaccia 
+ * ConcreateProduct: implementa l'oggetto definito da product
 
 ![image](https://user-images.githubusercontent.com/86314085/175505855-c64a33b3-19c6-4fd0-abae-be3c4542f321.png)
 
 
-**• Observer** : Definisce un meccanisco per tenere traccia di diversi oggetti riguardo gli eventi che succedono all'oggeto stesso. Abbiamo:
- *- Publisher: oggetto principale che voglio osservare * \
- *- Subscriber: tutti gli oggetti di cui vogliamo tener traccia dei cambiamenti del Publisher * \
+**• Observer** : Definisce un meccanisco per tenere traccia di diversi oggetti riguardo gli eventi che succedono all'oggeto stesso. 
+
+Abbiamo:
+
+ * Publisher: oggetto principale che voglio osservare 
+ * Subscriber: tutti gli oggetti di cui vogliamo tener traccia dei cambiamenti del Publisher 
 
 Si usa quando il cambiamento di stato di un oggetto (Publisher) potrebbe richiedere cambiamenti anche agli altri (Subscriver)
 
@@ -121,21 +123,21 @@ Verifica inoltre se si può o meno autenticare o verificare se si può eseguire 
 ```bash
 git clone https://github.com/LucreziAntenucci98/Progetto_Programmazione_Avanzata
 ```
-**•Eseguire il seguente comando:** (sostituire 'mysupersecretkey' con la chiave con la quale verranno generati i token JWT) 
+**•Eseguire il seguente comando:** (sostituire 'secretkey' con la chiave con la quale verranno generati i token JWT) 
 ```bash
-$ echo 'KEY=secretkey' >> .env
+$ 'KEY=secretkey' >> .env
 ```
 **• Avviare Docker tramite**
 ```bash
 docker-compose build
 docker-compose up
 ```
-**• Eseguire il servizio sulla porta 8080 tramite Postaman**
+**• Eseguire il servizio sulla porta 8080 tramite Postman**
 
 
 ## Test
+Per effettuare il Test del seguente progetto , abbiamo importato il file .json nella directory, che a sua volta dovrà essere importata all'interno dell'app Postman. 
 
-É possibile eseguire una serie di test predefiniti importando all'interno di Postman la collection che si può trovare all'interno della root directory di tale repository. Tutti i token JWT sono stati generati tramite la chiave 'secretkey'.
 
 
 
