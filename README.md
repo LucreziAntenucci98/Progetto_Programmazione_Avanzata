@@ -76,8 +76,6 @@ Di seguito si riportano i diagrammi UML:
 ![UMLcasid'uso](https://user-images.githubusercontent.com/86314085/175025430-2eadbd1a-3cf1-4ec9-8837-5baa92dced4d.png)
 
 
-
-
 ## Progettazione - Pattern
 
 **• factory** : fa parte della famiglia dei pattern creazionali in quanto fornisce il modo migliore per creare un'eggetto. Creiamo oggetti senza passare per il client utilizzando un interfaccia comune.
@@ -112,7 +110,7 @@ git clone https://github.com/LucreziAntenucci98/Progetto_Programmazione_Avanzata
 ```
 **•Eseguire il seguente comando:** (sostituire 'mysupersecretkey' con la chiave con la quale verranno generati i token JWT) 
 ```bash
-$ echo 'KEY=mysupersecretkey' >> .env
+$ echo 'KEY=secretkey' >> .env
 ```
 **• Avviare Docker tramite**
 ```bash
@@ -124,6 +122,7 @@ docker-compose up
 
 ## Test
 
+É possibile eseguire una serie di test predefiniti importando all'interno di Postman la collection che si può trovare all'interno della root directory di tale repository. Tutti i token JWT sono stati generati tramite la chiave 'secretkey'.
 
 
 
