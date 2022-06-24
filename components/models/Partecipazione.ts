@@ -54,13 +54,13 @@ export const Partecipazione = sequelize.define('partecipazione', {
 /**
  * 
  * @param partecipazione identifica i dati che l'utente invia 
- * @returns la partecipazione se esiste altrimenti l'errore
+ * @returns la partecipazione se esiste altrimenti restituisce un oggetto Errore con il relativo messaggio
  */
 export async function checkPartecipazioneExistence(partecipazione:any):Promise<any> {
     let result:any;
     try{
         //select by id_asta by username
-        result = await Partecipazione.findAll({where:
+        result = await Partecipazione.findAll({raw:true,where:
             {id_asta: partecipazione.id_asta,
              username:partecipazione.username},
         });
@@ -74,7 +74,8 @@ export async function checkPartecipazioneExistence(partecipazione:any):Promise<a
 /**
  * Funzione che valida la partecipazione effettiva dell'utente(si fanno i controlli di accesso)
  * @param partecipazione identifica l'utente che si inserisce per partecipare all'asta
- * @returns False se l'utente non può partecipare
+ * @returns true se può partecipare altrimenti 
+ * restituisce un oggetto Errore con il relativo messaggio
  */
 export async function validatorInsertPartecipazione(partecipazione:any):Promise<any>{
     const user = await checkUserExistence(partecipazione.username).then((user) => { 
@@ -110,7 +111,7 @@ export async function validatorInsertPartecipazione(partecipazione:any):Promise<
     return true;
 }
 /**
- * 
+ * Funzione che permette di ottenere le partecipazioni delle aste effettuate dagli utenti
  * @param username identifica il nome dell'utente
  * @returns il numero di partecipazioni dell'utente suddividendole in
  * aste vinte e aste non vinte

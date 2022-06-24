@@ -10,7 +10,6 @@ function writeLog(creator: Creator,messaggio:string) {
 /**
  * L'applicazione seleziona il tipo di creator a seconda della configurazione 
  * o ambiente
- * 
  */
 export const logError = (messaggio:string) =>{
     writeLog(new LogError(),messaggio);

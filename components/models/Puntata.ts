@@ -47,8 +47,8 @@ export const Puntata = sequelize.define('puntata', {
  * @returns false se non può puntare , True se può effettuare la puntata
  */
 
-//Per poter puntare bisogna essere un bid-partecipant
 export async function validatorInsertPuntata(partecipazione:any):Promise<any>{
+
     const user = await checkUserExistence(partecipazione.username).then((user) => { 
         if(user) return user;
         else return false;
@@ -56,14 +56,14 @@ export async function validatorInsertPuntata(partecipazione:any):Promise<any>{
 
     if(!user ) return new Error("Utente non esistente");
     if(user.ruolo !== "bid_partecipant") return new Error("L'utente deve avere il ruolo di bid_partecipant");
-    
+
     const asta = await checkAstaExistence(partecipazione.id_asta).then((asta) => { 
         if(asta) return asta;
         else return false;
     });
 
     if(!asta) return new Error("L'asta non esiste");
-    
+
     const partecipazioneObj = await checkPartecipazioneExistence(partecipazione).then((partecipazione:any) => { 
         if(partecipazione) return partecipazione;
         else return false;
@@ -82,6 +82,7 @@ export async function validatorInsertPuntata(partecipazione:any):Promise<any>{
     }).then((data:any)=>{
         return data;
     });
+
     if((resp.length + 1) * asta.incremento_puntata > asta.max_prezzo_asta) 
         return new Error("Non puoi puntare perchè è stato raggiunto il prezzo massimo dell'asta");
     if((resp.length + 1) * asta.incremento_puntata > user.credito) 
@@ -109,9 +110,9 @@ export async function getPuntateByIdAsta(id_asta:number):Promise<any>{
 }
 
 /**
- * 
+ * Funzione che ottiene le puntate effettuate dall'utente
  * @param id_partecipazione identificatore partecipazione
- * @returns le puntate effetttuate
+ * @returns le puntate effettuate
  */
 export async function getPuntateByIdPartecipazione(id_partecipazione:number):Promise<any>{
     const puntate = await Puntata.findAll({
@@ -126,8 +127,9 @@ export async function getPuntateByIdPartecipazione(id_partecipazione:number):Pro
 }
 
 /**
- * 
- * @param req dati inviati dall'utente
+ * Validazione della richiesta di visualizzazione dell'elenco
+ * dei rilanci effettuata dall'utente
+ * @param req dati valdati inviati dall'utente
  * @returns True se i dati sono inviati correttamente altrimenti False
  */
 export async function visualizzaElencoRilanciVal(req: any):Promise<any>{
@@ -164,9 +166,9 @@ export async function visualizzaElencoRilanciVal(req: any):Promise<any>{
                 else return false;
             });
             
-            if(!partecipazione) 
+            if(!partecipazione[0]) 
                 return new Error("L'utente non ha partecipato all'asta");
-            puntate = await getPuntateByIdPartecipazione(req.body.id_asta).then((puntate:any)=>{
+            puntate = await getPuntateByIdPartecipazione(partecipazione[0].id_partecipazione).then((puntate:any)=>{
                 return puntate; 
             });
 

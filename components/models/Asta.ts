@@ -3,6 +3,7 @@ import { DataTypes, Sequelize } from 'sequelize';
 import * as User from "./User";
 import { OBAsta, RaggiungimentoPartecipanti } from "../observer/observer";
 import { subjectList } from "../../index";
+import { Partecipazione } from "./Partecipazione";
 const sequelize: Sequelize = DatabaseSingleton.getInstance().getConnessione();
 
 /**
@@ -66,7 +67,16 @@ export const Asta = sequelize.define('asta',
         type: DataTypes.INTEGER(),
         defaultValue: 0
     },
+    raggiungimento_min_iscritti:{
+        type: DataTypes.BOOLEAN(),
+        defaultValue: true
+    },
     num_attuale_partecipanti: {
+        type: DataTypes.INTEGER(),
+        allowNull: false,
+        defaultValue: 0,
+    },
+    num_puntate_totali: {
         type: DataTypes.INTEGER(),
         allowNull: false,
         defaultValue: 0,
@@ -78,19 +88,38 @@ export const Asta = sequelize.define('asta',
     freezeTableName: true,
     hooks:{
         afterCreate: async (record:any, options) => {
+            //Dopo la creazione dell'asta passa ad aperta
             await record.update({ 'stato': 'aperta' });
-            const subject1 = new OBAsta(record.id_asta,record.min_partecipanti,record.durata_asta_minuti);
-            subjectList.push(subject1)
+            //Viene aggiunto il subject alla lista dei subject
+            const subject = new OBAsta(record.id_asta,record.min_partecipanti,record.durata_asta_minuti);
+            subjectList.push(subject)
+            //Viene creato l'observer che verrà "attaccato" al subject
             const observer = new RaggiungimentoPartecipanti();
             subjectList[record.id_asta-1].attach(observer);
-            //impostazione timer di 1 ora nel quale se alla fine del timer il numero di partecipanti è
+            //impostazione timer di 5 minuti nel quale se alla fine del timer il numero di partecipanti è
             //minore del numero minimo l'asta termina, non c'è un vincitore
             setTimeout(async () => {
                 const asta = await Asta.findByPk(record.id_asta);
                 if(asta.num_attuale_partecipanti < asta.min_partecipanti){
-                    await Asta.update({stato: "terminata"},{where:{"id_asta": asta.id_asta}});
+                    //lo stato dell'asta va a terminata e si indica tramite
+                    //il booleano 'raggiungimento_min_iscritti' a false che 
+                    //non è stato raggiunto il numero minimo di iscritti
+                    await Asta.update({stato: "terminata",raggiungimento_min_iscritti:false},{where:{"id_asta": asta.id_asta}});
+                    //ricaricare utenti che si erano iscritti
+                    const partecipazioni = await Partecipazione.findAll({
+                        where: {
+                            id_asta: asta.id_asta
+                        },
+                    }).then((partecipazioni:any)=>{
+                       return partecipazioni;     
+                    });
+                    //ottengo lista di username iscritti
+                    const usernameList:string[] = partecipazioni.map(part => part.username);
+                    //incremento credito degli utenti che si erano iscritti 
+                    if(usernameList.length>0)
+                        await User.User.increment(['credito'],{by: asta.quota_partecipazione,where:{username: usernameList}});
                 }
-            }, 60000);
+            }, 180000);
 
         },
         afterUpdate: (record:any,options) => {
@@ -102,9 +131,9 @@ export const Asta = sequelize.define('asta',
 });
 
 /**
- * Funzione asincrona che valida inserimento dell'asta (se può essere inseira o meno)
+ * Funzione asincrona che valida inserimento dell'asta (se può essere inserita o meno)
  * @param asta identifica l'asta
- * @returns True se la validazione è andata a buon fine
+ * @returns True se la validazione è andata a buon fine, in caso contrario un oggetto Error
  * 
  */
 
@@ -120,7 +149,7 @@ export async function validatorInsertAsta(asta:any):Promise<any>{
 /**
  * Funzione asincrona che effettua un check sull'esistenza dell'asta attraverso il suo identificatore
  * @param id_asta identificatore asta
- * @returns ritorna l'asta se essa esiste altrimenti errore
+ * @returns ritorna l'asta se essa esiste
  */
 export async function checkAstaExistence(id_asta:number):Promise<any> {
     let result:any;

@@ -14,6 +14,8 @@ CREATE TABLE asta (
   max_prezzo_asta INT NOT NULL,
   username_vincitore varchar(50) DEFAULT NULL,
   tot_prezzo_aggiudicato INT DEFAULT 0,
+  raggiungimento_min_iscritti BOOLEAN NOT NULL,
+  num_puntate_totali INT DEFAULT 0,
   num_attuale_partecipanti INT DEFAULT 0
 );
 

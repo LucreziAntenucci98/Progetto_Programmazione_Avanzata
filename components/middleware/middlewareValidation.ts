@@ -4,6 +4,7 @@ import * as AstaClass from "../models/Asta";
 import * as PartecipazioneClass from "../models/Partecipazione";
 import * as formatRequestValidator from "../utils/formatRequestValidator"
 import * as PuntataClass from "../models/Puntata"
+const { Op } = require("sequelize");
 
 
 /**
@@ -113,7 +114,7 @@ export async function puntataVal(req:any,res:any,next:any)  {
     next(errorResp);
 };
 /**
- * Funzione asincrona che effettua la validazione da utente ADMIN a "Giocatore"
+ * Funzione asincrona che effettua la validazione della ricarica da utente ADMIN a "Giocatore"
  * @param req identifica la richiesta
  * @param res identifica la risposta
  * @param next passa al prossimo middleware
@@ -298,8 +299,6 @@ export async function speseEffettuateVal(req:any,res:any,next:any) {
         next(error)
     }
 };
-////////////////////////////
-//DA IMPLEMENTARE
 /**
  * Funzione asincrona che valida le statistiche dell'asta secondo il numero di partecipazioni
  * @param req identifica la richiesta
@@ -317,33 +316,67 @@ export async function statsVal(req:any,res:any,next:any) {
             });
             if(user){
 
-
-
                 //statistiche
                 
+                let data = {
+                    n_aste_completate_successo: 0,
+                    n_aste_terminate_insufficienza_iscritti: 0,
+                    rapporto_puntate_effettuate_puntate_max: 0,
+                };
+
                 //numero aste completate con successo
                 //un asta è completata con successo se l'username del vincitore è diverso da ""
 
+                const { count, rows } = await AstaClass.Asta.findAndCountAll({
+                    raw:true,
+                    where: {
+                        stato:"terminata",
+                        username_vincitore: {
+                          [Op.ne]: ""
+                        },
+                        raggiungimento_min_iscritti: true
+                    }
+                });
 
-                //numero aste terminate per insufficienza di iscritti (??)
+                data.n_aste_completate_successo = count;
 
+                //numero aste terminate per insufficienza di iscritti
+                //un asta è terminate per insufficienza di iscritti se raggiungimento_min_iscritti = false
 
+                const {count_aste,rows_aste} = await AstaClass.Asta.findAndCountAll({
+                    where: {
+                        stato:"terminata",
+                        username_vincitore: "",
+                        raggiungimento_min_iscritti: false
+                    }
+                }).then((r) => {
+                        return {
+                          count_aste: r.count,
+                          rows_aste: r.rows
+                        };
+                });
+
+                data.n_aste_terminate_insufficienza_iscritti = count_aste;
 
                 //media del rapporto tra numero di puntate effettuate e numero max di puntate effettuabili
                 
-                
-                
+                if(rows.length==0) data.rapporto_puntate_effettuate_puntate_max = 0
+                else data.rapporto_puntate_effettuate_puntate_max  =
+                               rows.map(obj => obj.num_puntate_totali/(obj.num_attuale_partecipanti*obj.max_n_puntate_partecipante))
+                                   .reduce(function (pre, cur) {
+                                        return pre + cur;
+                                    })/rows.length;
                 
                 res.message = "Richiesta avvenuta con successo";
                 res.status_code = 200;
                 res.status_message = "OK";
-                res.data = {"partecipazioni": "stats"};
+                res.data = {"stats": data};
                 next();
 
                 
             }
             else{
-                errorResp = new Error("Operazione non permessa");
+                errorResp = new Error("L'utente deve essere un admin");
             }
         } 
         if(errorResp instanceof Error)

@@ -5,7 +5,7 @@ import * as auth from './components/middleware/middlewareAuth'
 import * as express from "express";
 import {errorHandler} from "./components/middleware/middlewareErrorHandler";
 import {OBAsta} from "./components/observer/observer"
-import {RaggiungimentoPartecipanti} from "./components/observer/observer"
+import { ResponseHttpBuilder } from "./components/response/ResponseHttpBuilder";
 /**
  * Sequenza codice
  */
@@ -19,6 +19,7 @@ const HOST = '0.0.0.0';
 // App
 const app = express();
 
+//Rotta pubblica per la visualizzazione delle aste filtrando per lo stato con il metodo GET
 app.get('/VisualizzaAsteByStato',validation.visualizzaAsteByStatoVal, errorHandler, (req, res) => {
        sendResponses.sendSuccessReponseGET(res);
 });
@@ -65,14 +66,28 @@ app.get('/speseEffettuate',validation.speseEffettuateVal,  errorHandler,(req, re
 });
 //Rotta che visualizza lo stato dell'asta (creata,aperta,rilancio,terminata) con il metodo GET
 app.get('/stats', validation.statsVal, errorHandler,(req, res) => {
+       sendResponses.sendSuccessReponseGET(res);
 });
 
+//in caso in cui si inserisca una rotta non esistente
 app.get('*', function(req, res){
-       res.status(404).send({"message":"rotta non trovata"});
+       res.header("Content-Type", "application/json");
+       const response = new ResponseHttpBuilder();
+       let json = JSON.stringify(response.setStatusCode(404)
+                      .setStatus("Not found")
+                      .setMessage("Rotta non trovata")
+                      .build());
+       res.status(res.status_code).send(json);
 });
 
 app.post('*', function(req, res){
-       res.status(404).send({"message":"rotta non trovata"});
+       res.header("Content-Type", "application/json");
+       const response = new ResponseHttpBuilder();
+       let json = JSON.stringify(response.setStatusCode(404)
+                      .setStatus("Not found")
+                      .setMessage("Rotta non trovata")
+                      .build());
+       res.status(res.status_code).send(json);
 });
 
 app.listen(PORT, HOST);

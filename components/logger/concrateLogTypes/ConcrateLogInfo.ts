@@ -7,12 +7,25 @@ import {LogMsg} from "../LogMsg";
 export class ConcrateLogInfo implements LogMsg {
     private type:string = "info";
 
+    /**
+     * Metodo getter del tipo di logger
+     * @returns il tipo di logger
+     */
+
     public getType(): string{
         return this.type;
     }
 
+    /**
+     * Metodo che permette di scrivere sul file di log giornaliero delle info.
+     * Il messaggio viene scritto utilizzando il seguente formato:
+     * 
+     * [Info:AnnoMeseGiorno-Ora:Minuto] messaggio di info
+     * 
+     * @param msg Messaggio da scrivere sul file di log
+     */
 
-    public printMsg(msg:string){
+    public writeMsg(msg:string){
         const date = new Date();
         const fullDate = [
             date.getFullYear(),

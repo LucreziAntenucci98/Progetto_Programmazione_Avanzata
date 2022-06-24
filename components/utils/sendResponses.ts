@@ -1,5 +1,8 @@
 import { ResponseHttpBuilder } from "../response/ResponseHttpBuilder";
-
+/**
+ * Invio della risposta in caso di successo (POST) 
+ * @param res contiene i parametri per comporre la risposta HTTP
+ */
 export const sendSuccessReponsePOST = (res:any) => {
     res.header("Content-Type", "application/json");
     const response = new ResponseHttpBuilder();
@@ -9,7 +12,10 @@ export const sendSuccessReponsePOST = (res:any) => {
             .build());
     res.status(res.status_code).send(json);
 };
-
+/**
+ * Invio della risposta in caso di successo (GET) 
+ * @param res contiene i parametri per comporre la risposta HTTP
+ */
 export const sendSuccessReponseGET = (res:any) => {
     res.header("Content-Type", "application/json");
     const response = new ResponseHttpBuilder();
@@ -21,6 +27,10 @@ export const sendSuccessReponseGET = (res:any) => {
     res.status(res.status_code).send(json);
 };
 
+/**
+ * Invio della risposta in caso di successo (Errori) 
+ * @param res contiene i parametri per comporre la risposta HTTP
+ */
 export const sendErrorMessage = (res:any) => {
     res.header("Content-Type", "application/json");
     const response = new ResponseHttpBuilder();

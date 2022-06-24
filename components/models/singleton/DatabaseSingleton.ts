@@ -16,7 +16,13 @@ export class DatabaseSingleton {
 		this.connessione = new Sequelize(process.env.PGDATABASE, process.env.PGUSER, process.env.PGPASSWORD, {
 			host: process.env.PGHOST,
 			port: Number(process.env.PGPORT),
-			dialect: 'postgres'
+			dialect: 'postgres',
+            dialectOptions: {
+                dateStrings: true,
+                typeCast: true,
+                timezone: "+4:00"
+              },
+              timezone: "+4:00",
 		});
 	}
 

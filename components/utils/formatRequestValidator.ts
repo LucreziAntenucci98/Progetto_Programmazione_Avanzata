@@ -85,6 +85,11 @@ export const validateRawDataAstFilter = (data:any) =>{
 }
 
 export const validateRawTimeStampFilter = (data:any) =>{
+    /*
+    --DA VALIDARE--
+    data_inizio
+    data_fine
+    */
     const check = new RegExp(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/);
     return (typeof data.username == "string" &&
      (check.test(data.data_inizio) && Date.parse(data.data_inizio)) &&

@@ -1,5 +1,7 @@
 import { ResponseHttp} from './ResponseHttp';
-//Builder
+/**
+ * Classe utilizzata per comporre la risposta da inviare all'utente
+ */
 export class ResponseHttpBuilder{
     private status:string;
     private status_code:number;

@@ -67,7 +67,11 @@ export async function checkUserExistence(username:string):Promise<any> {
     return result;
 };
 
-
+/**
+ * Verifica se l'utente è un admin
+ * @param username identificatore dell'utente
+ * @returns l'utente se ha ruolo di admin, false se non esiste o non ha ruolo di admin
+ */
 export async function userIsAdmin(username:string):Promise<boolean> {
     let user:any;
     try{
@@ -80,6 +84,11 @@ export async function userIsAdmin(username:string):Promise<boolean> {
     else return false
 };
 
+/**
+ * Verifica se l'utente è un bid_partecipant
+ * @param username identificatore dell'utente
+ * @returns l'utente se ha ruolo di bid_partecipant, false se non esiste o non ha ruolo di bid_partecipant
+ */
 export async function userIsBidPartecipant(username:string):Promise<any> {
     let user:any;
     try{
@@ -92,6 +101,11 @@ export async function userIsBidPartecipant(username:string):Promise<any> {
     else return false
 };
 
+/**
+ * Verifica se l'utente è un bid_creator
+ * @param username identificatore dell'utente
+ * @returns l'utente se ha ruolo di bid_creator, false se non esiste o non ha ruolo di bid_creator
+ */
 export async function userIsBidCreator(username:string):Promise<any> {
     let user:any;
     try{

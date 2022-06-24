@@ -1,7 +1,7 @@
 /**
- * The LogMsg interface dichiara le operazioni che possono essere fatte
+ * L'interfaccia LogMsg dichiara le operazioni che possono essere fatte
  */
  export interface LogMsg {
-    printMsg(msg:string)
+    writeMsg(msg:string)
     getType(): string;
 }

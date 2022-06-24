@@ -6,6 +6,8 @@ services:
         environment:
           - POSTGRES_USER=postgres
           - POSTGRES_PASSWORD=postgres
+          - TZ=Europe/Rome
+          - PGTZ=Europe/Rome
         ports:
           - 5432:5432
         volumes: 
