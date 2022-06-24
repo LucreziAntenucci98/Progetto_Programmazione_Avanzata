@@ -80,14 +80,46 @@ Di seguito si riportano i diagrammi UML:
 
 ## Progettazione - Pattern
 
-**• factory** : \
-**• observable** \
-**• singleton** \
-**• builder** \
-**• middleware**
+**• factory** : fa parte della famiglia dei pattern creazionali in quanto fornisce il modo migliore per creare un'eggetto. Creiamo oggetti senza passare per il client utilizzando un interfaccia comune.
+
+![image](https://user-images.githubusercontent.com/86314085/175505855-c64a33b3-19c6-4fd0-abae-be3c4542f321.png)
+
+
+**• observable** : permette di definire una dipendenza 1-N fra oggetti, in modo tale che se un oggetto cambia il suo stato interno, ogni oggetto che dipende da lui, viene notificato e aggiornato automaticamente. Serve per mantenere un alto livello di consistenza fra le classi correlate senza riprodurre un'accoppiamento elevato.
+
+![image](https://user-images.githubusercontent.com/86314085/175506554-8ba9223d-22f4-4856-9b3a-308c430a3b6e.png)
+
+Abbiamo un oggetto che viene osservato e tanti che osservano i cambiamenti di quest'ultimo
+
+**• singleton** : Pattern creazionale. Coinvolge una singola classe che è responsabile della creazione dell'oggetto assicurandosi che  viene creato solo un singolo oggetto. FOrnisce un modo per accedere al suo unico oggetto, non ha necessità di creare un'istanza dell'oggetto della classe.
+
+![image](https://user-images.githubusercontent.com/86314085/175507090-a971e7ba-51d4-4139-8206-9bf374b00e47.png)
+
+
+**• builder** : pattern creazionale. Crea passo dopo passo l'oggetto finale ed è indipendente da altri oggetti.
+![image](https://user-images.githubusercontent.com/86314085/175507520-a74675ea-503f-462b-9a61-822bdee15a4d.png)
+
+
+**• middleware** : sono funzioni che prendono come argomento ad esempio request, responde..
+Verifica inoltre se si può o meno autenticare o verificare, eseguire una rotta
 
 ## Avvio
 
+**• Ambiente Docker installato sulla propria macchina**\
+**• Clonare la seguente repository da terminale**\
+```bash
+git clone https://github.com/LucreziAntenucci98/Progetto_Programmazione_Avanzata
+```
+**•Eseguire il seguente comando:** (sostituire 'mysupersecretkey' con la chiave con la quale verranno generati i token JWT) 
+```bash
+$ echo 'KEY=mysupersecretkey' >> .env
+```
+**• Avviare Docker tramite**
+```bash
+docker-compose build
+docker-compose up
+```
+**• Eseguire il servizio sulla porta 8080 tramite Postaman**
 
 
 ## Test
