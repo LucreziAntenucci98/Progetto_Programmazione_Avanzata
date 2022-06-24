@@ -78,28 +78,41 @@ Di seguito si riportano i diagrammi UML:
 
 ## Progettazione - Pattern
 
-**• factory** : fa parte della famiglia dei pattern creazionali in quanto fornisce il modo migliore per creare un'eggetto. Creiamo oggetti senza passare per il client utilizzando un interfaccia comune.
+**• Factory** : fa parte della famiglia dei pattern creazionali in quanto fornisce il modo migliore per creare un'eggetto. Creiamo oggetti senza passare per il client utilizzando un interfaccia comune.
+Abbiamo 4 classi:
+ *- Creator: contiene il factorymethod * \
+ *- ConcreteCreator: fa ritornare l'oggetto * \
+ *- Product: definisce l'interfaccia * \
+ *- ConcreateProduct: implementa l'oggetto definito da product* \
 
 ![image](https://user-images.githubusercontent.com/86314085/175505855-c64a33b3-19c6-4fd0-abae-be3c4542f321.png)
 
 
-**• observable** : permette di definire una dipendenza 1-N fra oggetti, in modo tale che se un oggetto cambia il suo stato interno, ogni oggetto che dipende da lui, viene notificato e aggiornato automaticamente. Serve per mantenere un alto livello di consistenza fra le classi correlate senza riprodurre un'accoppiamento elevato.
+**• Observer** : Definisce un meccanisco per tenere traccia di diversi oggetti riguardo gli eventi che succedono all'oggeto stesso. Abbiamo:
+ *- Publisher: oggetto principale che voglio osservare * \
+ *- Subscriber: tutti gli oggetti di cui vogliamo tener traccia dei cambiamenti del Publisher * \
+
+Si usa quando il cambiamento di stato di un oggetto (Publisher) potrebbe richiedere cambiamenti anche agli altri (Subscriver)
+
+I publisher e il subscriver comunicano tramite l'interfaccia
 
 ![image](https://user-images.githubusercontent.com/86314085/175506554-8ba9223d-22f4-4856-9b3a-308c430a3b6e.png)
 
 Abbiamo un oggetto che viene osservato e tanti che osservano i cambiamenti di quest'ultimo
 
-**• singleton** : Pattern creazionale. Coinvolge una singola classe che è responsabile della creazione dell'oggetto assicurandosi che  viene creato solo un singolo oggetto. FOrnisce un modo per accedere al suo unico oggetto, non ha necessità di creare un'istanza dell'oggetto della classe.
+**• Singleton** : Pattern creazionale. Coinvolge una singola classe che è responsabile della creazione dell'oggetto assicurandosi che  viene creato solo un singolo oggetto. Fornisce un modo per accedere al suo unico oggetto, non ha necessità di creare un'istanza dell'oggetto della classe.
 
 ![image](https://user-images.githubusercontent.com/86314085/175507090-a971e7ba-51d4-4139-8206-9bf374b00e47.png)
 
 
-**• builder** : pattern creazionale. Crea passo dopo passo l'oggetto finale ed è indipendente da altri oggetti.
+**• Builder** : pattern creazionale. Crea passo dopo passo l'oggetto finale ed è indipendente da altri oggetti.
+Abbiamo i costruttori che mi permettono di, a partire da un'oggetto della stessa classe di andare a generare oggetti più complessi in base alle necessità.
+
 ![image](https://user-images.githubusercontent.com/86314085/175507520-a74675ea-503f-462b-9a61-822bdee15a4d.png)
 
 
-**• middleware** : sono funzioni che prendono come argomento ad esempio request, responde..
-Verifica inoltre se si può o meno autenticare o verificare, eseguire una rotta
+**• Middleware** : sono funzioni che prendono come argomento ad esempio request, responde..
+Verifica inoltre se si può o meno autenticare o verificare se si può eseguire una rotta
 
 ## Avvio
 
