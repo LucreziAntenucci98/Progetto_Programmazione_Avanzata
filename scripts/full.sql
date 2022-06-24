@@ -46,15 +46,15 @@ ALTER TABLE users
 
 INSERT INTO users (username, credito, ruolo) 
   VALUES 
-  ('adriano_mancini', 100, 'bid_partecipant'), 
-  ('lucrezia_antenucci', 100, 'bid_partecipant'),
-  ('sam_leli', 100, 'bid_partecipant'),
-  ('luca_rossi', 100, 'bid_partecipant'),
-  ('rita_bianchi', 100, 'bid_partecipant'),
-  ('xi_li', 100, 'bid_partecipant'),
-  ('petra96', 100, 'bid_partecipant'),
-  ('giulia_stracci', 100, 'bid_partecipant'),
-  ('simo_dirado', 100, 'bid_partecipant'),
+  ('adriano_mancini', 1000, 'bid_partecipant'), 
+  ('lucrezia_antenucci', 1000, 'bid_partecipant'),
+  ('sam_leli', 1000, 'bid_partecipant'),
+  ('luca_rossi', 1000, 'bid_partecipant'),
+  ('rita_bianchi', 1000, 'bid_partecipant'),
+  ('xi_li', 1000, 'bid_partecipant'),
+  ('petra96', 1000, 'bid_partecipant'),
+  ('giulia_stracci', 1000, 'bid_partecipant'),
+  ('simo_dirado', 1000, 'bid_partecipant'),
   ('andrea_felicetti', 0, 'bid_creator'),
   ('sara_bianchi', 0, 'bid_creator'),
   ('admin', 0, 'admin');

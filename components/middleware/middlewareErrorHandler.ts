@@ -3,7 +3,7 @@ import * as logger from "../utils/Logger";
  * Funzione che gestisce le eccezioni e scrive sul file di log
  * @param err identifica l'errore/eccezione della richiesta
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export const errorHandler = (err,req,res,next) => { 

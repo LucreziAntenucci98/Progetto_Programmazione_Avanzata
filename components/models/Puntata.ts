@@ -77,12 +77,13 @@ export async function validatorInsertPuntata(partecipazione:any):Promise<any>{
 
     let resp = await Puntata.findAll({
         where: {
-            "id_partecipazione": partecipazioneObj[0].id_partecipazione
+            "id_asta": partecipazioneObj[0].id_asta
         }
     }).then((data:any)=>{
         return data;
     });
-
+    if((resp.length + 1) * asta.incremento_puntata > asta.max_prezzo_asta) 
+        return new Error("Non puoi puntare perchè è stato raggiunto il prezzo massimo dell'asta");
     if((resp.length + 1) * asta.incremento_puntata > user.credito) 
         return new Error("Non hai credito sufficiente per rilanciare ancora");
 

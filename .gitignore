@@ -37,3 +37,4 @@ public
 *.sublime-project
 *.sublime-workspace
 sftp-config.json
+package-lock.json

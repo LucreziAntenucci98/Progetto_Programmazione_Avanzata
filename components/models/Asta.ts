@@ -79,10 +79,19 @@ export const Asta = sequelize.define('asta',
     hooks:{
         afterCreate: async (record:any, options) => {
             await record.update({ 'stato': 'aperta' });
-            const subject1 = new OBAsta(record.id_asta,record.min_partecipanti);
+            const subject1 = new OBAsta(record.id_asta,record.min_partecipanti,record.durata_asta_minuti);
             subjectList.push(subject1)
             const observer = new RaggiungimentoPartecipanti();
             subjectList[record.id_asta-1].attach(observer);
+            //impostazione timer di 1 ora nel quale se alla fine del timer il numero di partecipanti è
+            //minore del numero minimo l'asta termina, non c'è un vincitore
+            setTimeout(async () => {
+                const asta = await Asta.findByPk(record.id_asta);
+                if(asta.num_attuale_partecipanti < asta.min_partecipanti){
+                    await Asta.update({stato: "terminata"},{where:{"id_asta": asta.id_asta}});
+                }
+            }, 60000);
+
         },
         afterUpdate: (record:any,options) => {
             if(record.stato === "rilancio"){

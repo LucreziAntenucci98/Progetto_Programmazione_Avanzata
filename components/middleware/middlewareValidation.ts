@@ -9,7 +9,7 @@ import * as PuntataClass from "../models/Puntata"
 /**
  * Funzione asincrona per validare la richiesta di inserimento dell'asta
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export async function insertBidVal (req:any,res:any,next:any){
@@ -36,7 +36,7 @@ export async function insertBidVal (req:any,res:any,next:any){
 /**
  * Funzione asincrona per validare la richiesta di partecipazione ad un'asta
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export async function partecipaAstaVal(req:any,res:any,next:any) {
@@ -68,7 +68,7 @@ export async function partecipaAstaVal(req:any,res:any,next:any) {
 /**
  * Funzione asincrona che valida la puntata effettuata durante l'asta
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export async function puntataVal(req:any,res:any,next:any)  {
@@ -115,7 +115,7 @@ export async function puntataVal(req:any,res:any,next:any)  {
 /**
  * Funzione asincrona che effettua la validazione da utente ADMIN a "Giocatore"
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export async function ricaricaUtenteVal(req:any,res:any,next:any)  {
@@ -140,7 +140,7 @@ export async function ricaricaUtenteVal(req:any,res:any,next:any)  {
 /**
  * Funzione asincrona che valida la richiesta di controllo del credito residuo 
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export async function verificaCreditoResiduoVal(req:any,res:any,next:any) {
@@ -173,7 +173,7 @@ export async function verificaCreditoResiduoVal(req:any,res:any,next:any) {
 /**
  * Funzione asincrona che valida l'elenco dei rilanci effettuati
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export async function elencoRilanciVal(req:any,res:any,next:any) {
@@ -202,7 +202,7 @@ export async function elencoRilanciVal(req:any,res:any,next:any) {
 /**
  * Funzione asincrona che valida la visualizzazione delle aste per stato (creata, aperta, rilancio, terminata)
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export async function visualizzaAsteByStatoVal(req:any,res:any,next:any) {
@@ -230,7 +230,7 @@ export async function visualizzaAsteByStatoVal(req:any,res:any,next:any) {
  * Funzione asincrona che effettua la validazione sullo storico delle aste (visualizza tutte le aste effettuate in un 
  * determinato periodo temporale)
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export async function storicoAsteVal(req:any,res:any,next:any) {
@@ -267,7 +267,7 @@ export async function storicoAsteVal(req:any,res:any,next:any) {
 /**
  * Funzione asincrona che effettua la validazione sulle spese effettuate durante tutte le partecipazioni (storico)
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export async function speseEffettuateVal(req:any,res:any,next:any) {
@@ -303,7 +303,7 @@ export async function speseEffettuateVal(req:any,res:any,next:any) {
 /**
  * Funzione asincrona che valida le statistiche dell'asta secondo il numero di partecipazioni
  * @param req identifica la richiesta
- * @param res identifica la risorsa
+ * @param res identifica la risposta
  * @param next passa al prossimo middleware
  */
 export async function statsVal(req:any,res:any,next:any) {
@@ -317,7 +317,23 @@ export async function statsVal(req:any,res:any,next:any) {
             });
             if(user){
 
+
+
                 //statistiche
+                
+                //numero aste completate con successo
+                //un asta è completata con successo se l'username del vincitore è diverso da ""
+
+
+                //numero aste terminate per insufficienza di iscritti (??)
+
+
+
+                //media del rapporto tra numero di puntate effettuate e numero max di puntate effettuabili
+                
+                
+                
+                
                 res.message = "Richiesta avvenuta con successo";
                 res.status_code = 200;
                 res.status_message = "OK";
