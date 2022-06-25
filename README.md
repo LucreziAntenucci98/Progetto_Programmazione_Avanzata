@@ -84,9 +84,6 @@ Abbiamo 4 classi:
  * Product: definisce l'interfaccia 
  * ConcreateProduct: implementa l'oggetto definito da product
 
-![image](https://user-images.githubusercontent.com/86314085/175505855-c64a33b3-19c6-4fd0-abae-be3c4542f321.png)
-
-
 **• Observer** : Definisce un meccanisco per tenere traccia di diversi oggetti riguardo gli eventi che succedono all'oggeto stesso. 
 
 Abbiamo:
@@ -98,20 +95,13 @@ Si usa quando il cambiamento di stato di un oggetto (Publisher) potrebbe richied
 
 I publisher e il subscriver comunicano tramite l'interfaccia
 
-![image](https://user-images.githubusercontent.com/86314085/175506554-8ba9223d-22f4-4856-9b3a-308c430a3b6e.png)
-
 Abbiamo un oggetto che viene osservato e tanti che osservano i cambiamenti di quest'ultimo
 
 **• Singleton** : Pattern creazionale. Coinvolge una singola classe che è responsabile della creazione dell'oggetto assicurandosi che  viene creato solo un singolo oggetto. Fornisce un modo per accedere al suo unico oggetto, non ha necessità di creare un'istanza dell'oggetto della classe.
 
-![image](https://user-images.githubusercontent.com/86314085/175507090-a971e7ba-51d4-4139-8206-9bf374b00e47.png)
-
 
 **• Builder** : pattern creazionale. Crea passo dopo passo l'oggetto finale ed è indipendente da altri oggetti.
 Abbiamo i costruttori che mi permettono di, a partire da un'oggetto della stessa classe di andare a generare oggetti più complessi in base alle necessità.
-
-![image](https://user-images.githubusercontent.com/86314085/175507520-a74675ea-503f-462b-9a61-822bdee15a4d.png)
-
 
 **• Middleware** : sono funzioni che prendono come argomento ad esempio request, responde..
 Verifica inoltre se si può o meno autenticare o verificare se si può eseguire una rotta
