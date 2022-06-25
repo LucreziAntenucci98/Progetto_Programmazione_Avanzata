@@ -70,7 +70,7 @@ Di seguito si riporta il diagramma UML:
 
 • Use Case Diagram 
 
-![image](https://user-images.githubusercontent.com/86314085/175553609-be9d791e-bb90-4b52-8241-e2ace81a748e.png)
+![aste](https://user-images.githubusercontent.com/86314085/175765849-463664be-cc8a-47ab-9de6-d8237c0ded9a.jpg)
 
 • Sequence Diagram
 
