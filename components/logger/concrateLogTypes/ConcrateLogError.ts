@@ -34,12 +34,12 @@ export class ConcrateLogError implements LogMsg {
                             date.getDate().toString().padStart(2, '0'),
                         ].join('')
         
-        writeFile('storage/logs/error/'+fullDate+'_error.log',"[ Error: "+date.toLocaleString()+" ]" + msg, {
+        writeFile('storage/logs/error/'+fullDate+'_error.log',"[ Error: "+date.toLocaleString()+" ]" + msg +"\n", {
             encoding: "utf8",
             flag: "a+"
         },(err) => {
             if (err) throw err;
-            console.log('The file has been saved!');
+            console.log('Scrittura sul file di log Error');
         });
     }
 }

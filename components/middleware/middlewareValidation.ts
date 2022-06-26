@@ -4,6 +4,7 @@ import * as AstaClass from "../models/Asta";
 import * as PartecipazioneClass from "../models/Partecipazione";
 import * as formatRequestValidator from "../utils/formatRequestValidator"
 import * as PuntataClass from "../models/Puntata"
+import * as logger from "../utils/logger";
 const { Op } = require("sequelize");
 
 
@@ -16,15 +17,20 @@ const { Op } = require("sequelize");
 export async function insertBidVal (req:any,res:any,next:any){
     let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataAsta(req.body))
+        if(!formatRequestValidator.validateRawDataAsta(req.body)){
             errorResp = new Error("Errore di formattazione del payload")
+            res.status_code = 400;
+            res.status_message = "Bad Request";
+        }
         else{
             errorResp = await AstaClass.validatorInsertAsta(req.body);
             if(!(errorResp instanceof Error)){
-                await AstaClass.Asta.create(req.body).then(() =>{
+                await AstaClass.Asta.create(req.body).then((asta:any) =>{
+                    logger.logInfo(`L'asta con id ${asta.id_asta} è stata creata`)
                     res.message = "Asta creata";
-                    res.status_code = 200;
-                    res.status_message = "OK";
+                    res.status_code = 201;
+                    res.status_message = "Created";
+                    res.data = {"id_asta":asta.id_asta};
                     next();
                 });
             }
@@ -43,8 +49,11 @@ export async function insertBidVal (req:any,res:any,next:any){
 export async function partecipaAstaVal(req:any,res:any,next:any) {
     let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataPartecipazione(req.body)) 
-            errorResp = new Error("Errore di formattazione del payload");
+        if(!formatRequestValidator.validateRawDataPartecipazione(req.body)){
+            errorResp = new Error("Errore di formattazione del payload")
+            res.status_code = 400;
+            res.status_message = "Bad Request";
+        }
         else{
             errorResp = await PartecipazioneClass.validatorInsertPartecipazione(req.body);
             if(!(errorResp instanceof Error)){
@@ -54,6 +63,7 @@ export async function partecipaAstaVal(req:any,res:any,next:any) {
                 const quota_partecipazione = asta.quota_partecipazione;
                 req.body.spesa_partecipazione = quota_partecipazione;
                 await PartecipazioneClass.Partecipazione.create(req.body).then(() =>{
+                    logger.logInfo(`L'utente ${req.body.username} partecipa all'asta ${req.body.id_asta}`);
                     res.message = "Iscrizione all'asta avvenuta con successo";
                     res.status_code = 200;
                     res.status_message = "OK";
@@ -75,20 +85,15 @@ export async function partecipaAstaVal(req:any,res:any,next:any) {
 export async function puntataVal(req:any,res:any,next:any)  {
     let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataPartecipazione(req.body)) 
-            errorResp = new Error("Errore di formattazione del payload");
+        if(!formatRequestValidator.validateRawDataPartecipazione(req.body)){
+            errorResp = new Error("Errore di formattazione del payload")
+            res.status_code = 400;
+            res.status_message = "Bad Request";
+        }
         else{
             errorResp = await PuntataClass.validatorInsertPuntata(req.body);
             if(!(errorResp instanceof Error)){
-                
-                let partecipazione = await PartecipazioneClass.Partecipazione.findAll({where:
-                    {id_asta: req.body.id_asta,
-                     username:req.body.username},
-                }).then((partecipazione:any)=>{
-                    return partecipazione;
-                });
-
-                req.body.id_partecipazione = partecipazione[0].id_partecipazione;
+                logger.logInfo(`L'utente ${req.body.username} rilancia all'asta ${req.body.id_asta}`);
                 
                 await PartecipazioneClass.Partecipazione.increment(
                     ['contatore_puntate'],
@@ -99,11 +104,17 @@ export async function puntataVal(req:any,res:any,next:any)  {
                         username: req.body.username
                      }
                 });
-
+                let partecipazione = await PartecipazioneClass.getPartecipazioniByUsernameIdAsta(req.body.username,req.body.id_asta);
+                let asta = await AstaClass.checkAstaExistence(req.body.id_asta);
+                req.body.id_partecipazione = partecipazione.id_partecipazione;
                 await PuntataClass.Puntata.create(req.body).then(() =>{
                     res.message = "Rilancio avvenuto con successo";
                     res.status_code = 200;
                     res.status_message = "OK";
+                    res.data={
+                        "id_asta":req.body.id_asta,
+                        "puntate_rimaste":asta.max_n_puntate_partecipante - partecipazione.contatore_puntate
+                    }
                     next();
                 });
             }
@@ -122,14 +133,19 @@ export async function puntataVal(req:any,res:any,next:any)  {
 export async function ricaricaUtenteVal(req:any,res:any,next:any)  {
     let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataRicaricaCredito(req.body)) 
-            errorResp = new Error("Errore di formattazione del payload");
+        if(!formatRequestValidator.validateRawDataRicaricaCredito(req.body)){
+            errorResp = new Error("Errore di formattazione del payload")
+            res.status_code = 400;
+            res.status_message = "Bad Request";
+        }
         else{
             errorResp = await UserClass.validatorRicaricaUtente(req.body); 
             if(!(errorResp instanceof Error)){
+                logger.logInfo(`L'utente ${req.body.username} è stato ricaricaricato di ${req.body.quantita} token`);
                 res.message = "Ricarica Utente avvenuta con successo";
                 res.status_code = 200;
                 res.status_message = "OK";
+                res.data = {"valore_ricarica":req.body.quantita};
                 next();
             }
         } 
@@ -147,8 +163,11 @@ export async function ricaricaUtenteVal(req:any,res:any,next:any)  {
 export async function verificaCreditoResiduoVal(req:any,res:any,next:any) {
     let errorResp:any;
     try{
-        if(typeof req.body.username != "string") 
-            errorResp = new Error("Errore di formattazione del payload");
+        if(typeof req.body.username != "string"){
+            errorResp = new Error("Errore di formattazione del payload")
+            res.status_code = 400;
+            res.status_message = "Bad Request";
+        }
         else{
             const user = await UserClass.userIsBidPartecipant(req.body.username).then((user) => { 
                 return user;
@@ -180,8 +199,11 @@ export async function verificaCreditoResiduoVal(req:any,res:any,next:any) {
 export async function elencoRilanciVal(req:any,res:any,next:any) {
     let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataElencoRilanci(req.body)) 
-            errorResp = new Error("Errore di formattazione del payload");
+        if(!formatRequestValidator.validateRawDataElencoRilanci(req.body)){
+            errorResp = new Error("Errore di formattazione del payload")
+            res.status_code = 400;
+            res.status_message = "Bad Request";
+        }
         else{
             let response = await PuntataClass.visualizzaElencoRilanciVal(req);
             if(response instanceof Error){
@@ -209,8 +231,11 @@ export async function elencoRilanciVal(req:any,res:any,next:any) {
 export async function visualizzaAsteByStatoVal(req:any,res:any,next:any) {
     let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataAstFilter(req.query)) 
-            errorResp = new Error("Errore di formattazione del payload");
+        if(!formatRequestValidator.validateRawDataAstFilter(req.query)){
+            errorResp = new Error("Errore di formattazione del payload")
+            res.status_code = 400;
+            res.status_message = "Bad Request";
+        }
         else{
             await AstaClass.Asta.findAll({where:
                 {stato: req.query.stato},raw:true}).then((aste:any) =>{
@@ -237,8 +262,11 @@ export async function visualizzaAsteByStatoVal(req:any,res:any,next:any) {
 export async function storicoAsteVal(req:any,res:any,next:any) {
     let errorResp:any;
     try{
-        if(typeof req.body.username != "string") 
-            errorResp = new Error("Errore di formattazione del payload");
+        if(typeof req.body.username != "string"){
+            errorResp = new Error("Errore di formattazione del payload")
+            res.status_code = 400;
+            res.status_message = "Bad Request";
+        }
         else{
             const user = await UserClass.userIsBidPartecipant(req.body.username).then((user) => { 
                 return user;
@@ -274,18 +302,29 @@ export async function storicoAsteVal(req:any,res:any,next:any) {
 export async function speseEffettuateVal(req:any,res:any,next:any) {
     let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawTimeStampFilter(req.body)) 
-            errorResp = new Error("Errore di formattazione del payload");
+        if(!formatRequestValidator.validateRawTimeStampFilter(req.body)){
+            errorResp = new Error("Errore di formattazione del payload")
+            res.status_code = 400;
+            res.status_message = "Bad Request";
+        }
         else{
             const user = await UserClass.userIsBidPartecipant(req.body.username).then((user) => { 
                 return user;
             });
             if(user){
-                await PartecipazioneClass.filterPartecipazioniByDate(req.body).then((partecipazioni:any) =>{
+                await PartecipazioneClass.filterPartecipazioniByDate(req.body).then((partecipazioni) =>{
+                    
+                    let somma_spese = 0;
+                    if(partecipazioni.length >0)
+                        somma_spese = partecipazioni.map(obj => obj.spesa_partecipazione)
+                                   .reduce(function (pre, cur) {
+                                        return pre + cur;
+                                    });
                     res.message = "Richiesta avvenuta con successo";
                     res.status_code = 200;
                     res.status_message = "OK";
-                    res.data = {"partecipazioni": partecipazioni};
+                    res.data = {"spese_totali":somma_spese,
+                                "partecipazioni": partecipazioni};
                     next();
                 });
             }
@@ -308,8 +347,11 @@ export async function speseEffettuateVal(req:any,res:any,next:any) {
 export async function statsVal(req:any,res:any,next:any) {
     let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawTimeStampFilter(req.body)) 
-            errorResp = new Error("Errore di formattazione del payload");
+        if(!formatRequestValidator.validateRawTimeStampFilter(req.body)){
+            errorResp = new Error("Errore di formattazione del payload")
+            res.status_code = 400;
+            res.status_message = "Bad Request";
+        }
         else{
             const user = await UserClass.userIsAdmin(req.body.username).then((user) => { 
                 return user;

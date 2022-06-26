@@ -2,6 +2,7 @@ import * as AstaClass from "../models/Asta";
 import { Partecipazione } from "../models/Partecipazione";
 import { Puntata } from "../models/Puntata";
 import { User } from "../models/User";
+import * as logger from "../utils/logger"
 
 /**
   * Interfaccia che identifica i metodi che il subject deve implementare
@@ -46,10 +47,10 @@ export class OBAsta implements IAsta {
     public attach(observer: Observer): void {
         const isExist = this.observers.includes(observer);
         if (isExist) {
-            return console.log('Subject: Observer has been attached already.');
+            return console.log('Subject: l\'observer è già stato attaccato');
         }
 
-        console.log('Subject: Attached an observer.');
+        console.log('Subject: Observer attaccato.');
         this.observers.push(observer);
     }
 
@@ -84,6 +85,7 @@ export class OBAsta implements IAsta {
         this.num_partecipanti += 1;
 
         console.log(`L'attuale numero di partecipanti all'asta ${this.id_asta } è: ${this.num_partecipanti}`);
+        logger.logInfo(`L'attuale numero di partecipanti all'asta ${this.id_asta } è: ${this.num_partecipanti}`);
         this.notify();
     }
 
@@ -103,8 +105,8 @@ export class OBAsta implements IAsta {
 export class RaggiungimentoPartecipanti implements Observer {
     public update(subject: IAsta ): void {
         if (subject instanceof OBAsta && subject.num_partecipanti === subject.min_num_partecipanti) {
-            console.log('ConcreteObserverA: Reacted to the event.');
-            
+            console.log('RaggiungimentoPartecipanti: è stato raggiunto il numero minimo per l\'asta ' + subject.id_asta);
+            logger.logInfo('RaggiungimentoPartecipanti: è stato raggiunto il numero minimo per l\'asta ' + subject.id_asta);
             //viene aggiornato lo stato dell'asta a "rilancio"
             //da questo momento quindi i partecipanti possono rilanciare
             AstaClass.Asta.update(
@@ -117,6 +119,7 @@ export class RaggiungimentoPartecipanti implements Observer {
                     //al termine del timer, l'asta viene chiusa (stato: terminata), quindi nessun partecipante
                     //potrà rilanciare. Inoltre viene richiamato il metodo assegnaVincitore.
                     console.log("ASTA "+subject.id_asta + " CHIUSA");
+                    logger.logInfo("ASTA "+subject.id_asta + " CHIUSA");
                     await AstaClass.Asta.update({stato: "terminata"},{where:{"id_asta": subject.id_asta} });
                     assegnaVincitore(subject.id_asta)
                 }, subject.minuti_asta*1000*60);
@@ -138,6 +141,7 @@ export class RaggiungimentoPartecipanti implements Observer {
                 //Calcolo del numero di rilanci massimo
                 const contatore_puntateList:number[] = partecipazioni.map(obj => obj.contatore_puntate)
                 const maxValue:number = Math.max(...contatore_puntateList);
+                if(maxValue === 0) return;
                 //ottengo i partecipanti che hanno effettuato più puntate
                 const partecipazione_filter:any[] = partecipazioni.filter(obj => obj.contatore_puntate === maxValue);
                 //se la lunghezza è 1, significa che solo un partecipante ha fatto più rilanci, quindi è lui il vincitore
@@ -176,6 +180,7 @@ export class RaggiungimentoPartecipanti implements Observer {
             const operazioniVincitore = async (username:string,id_asta:number):Promise<void> => {
                 //calcolare la spesa
                 console.log("IL VINCITORE DELL'ASTA " + id_asta + " è: " + username);
+                logger.logInfo("IL VINCITORE DELL'ASTA " + id_asta + " è: " + username);
                 //ottengo l'asta
                 const asta = await AstaClass.Asta.findByPk(id_asta,{raw:true});
                 //conto il numero delle puntate per calcolare il prezzo finale dell'asta

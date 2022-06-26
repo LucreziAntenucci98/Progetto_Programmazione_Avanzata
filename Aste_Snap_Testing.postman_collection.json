@@ -1,0 +1,1037 @@
+{
+	"info": {
+		"_postman_id": "870d9d2c-fb66-4703-a8ee-4d39aa62e9b2",
+		"name": "Aste Snap Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreazioneAste",
+			"item": [
+				{
+					"name": "creaAstaAndreaFelicetti-1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9jcmVhdG9yIjoiYW5kcmVhX2ZlbGljZXR0aSIsIm5vbWVfb2dnZXR0byI6InNtYXJ0cGhvbmUiLCJtaW5fcGFydGVjaXBhbnRpIjoyLCJtYXhfcGFydGVjaXBhbnRpIjo1LCJxdW90YV9wYXJ0ZWNpcGF6aW9uZSI6NSwiZHVyYXRhX2FzdGFfbWludXRpIjoxLCJpbmNyZW1lbnRvX3B1bnRhdGEiOjUsIm1heF9uX3B1bnRhdGVfcGFydGVjaXBhbnRlIjo1LCJtYXhfcHJlenpvX2FzdGEiOjEyNX0.ZNNWcK8esgy_6JTl8W0Rz3JvoMZdkxYZPuKxG4wfGhk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/creaAsta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"creaAsta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "creaAstaSaraBianchi-2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9jcmVhdG9yIjoic2FyYV9iaWFuY2hpIiwibm9tZV9vZ2dldHRvIjoib2dnZXR0bzIiLCJtaW5fcGFydGVjaXBhbnRpIjoyLCJtYXhfcGFydGVjaXBhbnRpIjo1LCJxdW90YV9wYXJ0ZWNpcGF6aW9uZSI6NSwiZHVyYXRhX2FzdGFfbWludXRpIjoyLCJpbmNyZW1lbnRvX3B1bnRhdGEiOjgsIm1heF9uX3B1bnRhdGVfcGFydGVjaXBhbnRlIjo1LCJtYXhfcHJlenpvX2FzdGEiOjIwMH0.G1E_2kGkcqBVPX-bfhfVJOvpT1H2R9JbTCEh5KIUFHA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/creaAsta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"creaAsta"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PartecipaAsta(id_asta=1)",
+			"item": [
+				{
+					"name": "PartecipazioneAstaSamuele",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/partecipaAsta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"partecipaAsta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PartecipazioneAstaLucrezia",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjF9.aeL0PZvTeqCamhg51Y6p_DfTH5aLzgbq68rgrL7PahY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/partecipaAsta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"partecipaAsta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PartecipazioneAstaAdriano",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSIsImlkX2FzdGEiOjF9.scC6cRa2JkrZiRDIYCEQt6C2jRc8xsU0BVdKlmFRMSc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/partecipaAsta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"partecipaAsta"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PartecipaAsta(id_asta=2)",
+			"item": [
+				{
+					"name": "PartecipazioneAstaLucrezia",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjJ9.2-xG5lO9JYHP00s9GJUxxPySAq3rgSNutzN9BYxo-34",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/partecipaAsta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"partecipaAsta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PartecipazioneAstaSamuele",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6Mn0.KefNqZXgSn1nj_ZqvpLhJUyOG8S3nWaQcesYWV4nD6k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/partecipaAsta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"partecipaAsta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PartecipazioneAstaAdriano",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSIsImlkX2FzdGEiOjJ9.dl9TY3lHgKEZfcmF4qAFJJvxF9QyJKXiRejebAkYcGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/partecipaAsta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"partecipaAsta"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rilancio (id_asta=1)",
+			"item": [
+				{
+					"name": "Rilancio Samuele",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rilancia",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rilancia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rilancio Lucrezia",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjF9.aeL0PZvTeqCamhg51Y6p_DfTH5aLzgbq68rgrL7PahY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rilancia",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rilancia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RilancioAdriano",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSIsImlkX2FzdGEiOjF9.scC6cRa2JkrZiRDIYCEQt6C2jRc8xsU0BVdKlmFRMSc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rilancia",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rilancia"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rilancio (id_asta=2)",
+			"item": [
+				{
+					"name": "Rilancio Lucrezia",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjJ9.2-xG5lO9JYHP00s9GJUxxPySAq3rgSNutzN9BYxo-34",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rilancia",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rilancia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rilancio Samuele",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6Mn0.KefNqZXgSn1nj_ZqvpLhJUyOG8S3nWaQcesYWV4nD6k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rilancia",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rilancia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RilancioAdriano",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSIsImlkX2FzdGEiOjJ9.dl9TY3lHgKEZfcmF4qAFJJvxF9QyJKXiRejebAkYcGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rilancia",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rilancia"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RicaricaUtente(Admin)",
+			"item": [
+				{
+					"name": "RicaricaSamuele200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9hZG1pbiI6ImFkbWluIiwidXNlcm5hbWVfZGVzdGluYXRhcmlvIjoic2FtX2xlbGkiLCJxdWFudGl0YSI6MjAwfQ.VJY54ZYYGvcUz3PaU5OxwE0bJlxxOk3kuZO-gfGQqRA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ricaricaUtente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ricaricaUtente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RicaricaLucrezia300",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9hZG1pbiI6ImFkbWluIiwidXNlcm5hbWVfZGVzdGluYXRhcmlvIjoibHVjcmV6aWFfYW50ZW51Y2NpIiwicXVhbnRpdGEiOjMwMH0.ZZrFBuhzxR0XqR5TJ2qRtD1gfTKlKLR8v7Cl5srWHUM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ricaricaUtente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ricaricaUtente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RicaricaAdriano200",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9hZG1pbiI6ImFkbWluIiwidXNlcm5hbWVfZGVzdGluYXRhcmlvIjoiYWRyaWFub19tYW5jaW5pIiwicXVhbnRpdGEiOjIwMH0.DgcDNJg67ejCREk4ZgUq46OtLHxHU0kcuyrAYq_UGtc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ricaricaUtente",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ricaricaUtente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "VerificaCreditoResiduo",
+			"item": [
+				{
+					"name": "CreditoResiduoSamuele",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIn0.zYWBd7lBhdu2ApNkdofgbxKX3f-qwhWbf0sqSzh-NkI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/verificaCreditoResiduo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"verificaCreditoResiduo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreditoResiduoLucrezia",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSJ9.Si4QatN5BgVfrcWgR84LcGDM_vHRKfkDFsOETJjq26E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/verificaCreditoResiduo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"verificaCreditoResiduo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreditoResiduoAdriano",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSJ9.98qY8HqsSB2T4AL7iF_EeeWPuA_qHGpP8CGHGYiOcz8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/verificaCreditoResiduo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"verificaCreditoResiduo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ElencoRilanci(bid_creator)",
+			"item": [
+				{
+					"name": "ElencoRilanci(id_asta=1)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkiLCJpZF9hc3RhIjoxfQ.TKpReZ9OvWkWpt8OKAmJYYd09k7DjHQ7zz10MXKiSwc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/elencoRilanci",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"elencoRilanci"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ElencoRilanci(id_asta=2)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhcmFfYmlhbmNoaSIsImlkX2FzdGEiOjJ9.FcG8zTbDBrxz1VsNP_iDlE4K_mZOtWMRl8tVFF5f04w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/elencoRilanci",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"elencoRilanci"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ElencoRilanci(bid_partecipant)",
+			"item": [
+				{
+					"name": "ElencoRilanciSamuele(id_asta=1)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/elencoRilanci",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"elencoRilanci"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ElencoRilanciLucrezia(id_asta=1)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjF9.aeL0PZvTeqCamhg51Y6p_DfTH5aLzgbq68rgrL7PahY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/elencoRilanci",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"elencoRilanci"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FiltraByStato(PUBLIC)",
+			"item": [
+				{
+					"name": "Aperta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/visualizzaAsteByStato?stato=aperta",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"visualizzaAsteByStato"
+							],
+							"query": [
+								{
+									"key": "stato",
+									"value": "aperta"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rilancio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/visualizzaAsteByStato?stato=rilancio",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"visualizzaAsteByStato"
+							],
+							"query": [
+								{
+									"key": "stato",
+									"value": "rilancio"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Terminata",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/visualizzaAsteByStato?stato=terminata",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"visualizzaAsteByStato"
+							],
+							"query": [
+								{
+									"key": "stato",
+									"value": "terminata"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SpeseEffettuate",
+			"item": [
+				{
+					"name": "speseEffettuateSamuele",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiZGF0YV9pbml6aW8iOiIyMDIyLTA2LTI0VDAxOjAwOjAwKzAxOjAwIiwiZGF0YV9maW5lIjoiMjAyMi0wNy0wN1QxNzowMDowMCswMTowMCJ9.wmnOrkFFvqN4ZOKEMX_e7YiCaoOwtDdZuzCRGudgkZs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/speseEffettuate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"speseEffettuate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "speseEffettuateLucrezia",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImRhdGFfaW5pemlvIjoiMjAyMi0wNi0yNFQwMTowMDowMCswMTowMCIsImRhdGFfZmluZSI6IjIwMjItMDctMDdUMTc6MDA6MDArMDE6MDAifQ.6YK44dXwtW6gnbLWiCNlhaFWAXhv5Ba3U2f-EncnHdM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/speseEffettuate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"speseEffettuate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "speseEffettuateAdriano",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSIsImRhdGFfaW5pemlvIjoiMjAyMi0wNi0yNFQwMTowMDowMCswMTowMCIsImRhdGFfZmluZSI6IjIwMjItMDctMDdUMTc6MDA6MDArMDE6MDAifQ.-VOOhAp1xvYP4y80K_cEh2dQqF6SkkGU56Hq0SJP3Js",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/speseEffettuate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"speseEffettuate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "StoricoAste",
+			"item": [
+				{
+					"name": "StoricoAsteSamuele",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIn0.zYWBd7lBhdu2ApNkdofgbxKX3f-qwhWbf0sqSzh-NkI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/storicoAste",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"storicoAste"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StoricoAsteLucrezia",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSJ9.Si4QatN5BgVfrcWgR84LcGDM_vHRKfkDFsOETJjq26E",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/storicoAste",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"storicoAste"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "StoricoAsteAdriano",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSJ9.98qY8HqsSB2T4AL7iF_EeeWPuA_qHGpP8CGHGYiOcz8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/storicoAste",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"storicoAste"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Statistiche(Admin)",
+			"item": [
+				{
+					"name": "Stats",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZGF0YV9pbml6aW8iOiIyMDIyLTA2LTI0VDAxOjAwOjAwKzAxOjAwIiwiZGF0YV9maW5lIjoiMjAyMi0wNy0wN1QxNzowMDowMCswMTowMCJ9.YM3PBg8gzeVWgMC05Vv8wJAWnBy9I_N9iV9nnXCx0b8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/stats",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

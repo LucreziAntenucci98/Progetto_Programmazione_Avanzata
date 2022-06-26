@@ -77,6 +77,16 @@ Rotta che permette la creazione di un'asta snap.
 Alla creazione dell'asta lo stato passa automaticamente da "creata" a "aperta", inoltre viene lanciato un timer di 5 minuti, il quale se viene superato, 
 controlla se è stato raggiunto il minimo numero di partecipanti.
 In caso non venga raggiunto il limite minimo, l'asta passa allo stato "terminata", e gli utenti che si erano iscritti ricevono la loro quota di iscrizione.
+Il payload della rotta /creaAsta contiene i campi:
+* username_creator: l'username dell'utente con ruolo bid-creator (stringa);
+* nome_oggetto: il nome dell'oggetto che si mette all'asta (stringa);
+* min_partecipanti e max_partecipanti: rispettivamente il numero minimo e massimo degli utenti bid-partecipant che possono partecipare all'asta (intero);
+* quota_partecipazione: la quota d'iscizione da pagare per partecipare (intero);
+* durata_asta_minuti: durata della fase di rilancio in minuti (float);
+* incremento_puntata: l'incremento del prezzo dell'asta ogni volta che un utente iscritto rilancia (intero);
+* max_n_puntate_partecipante: il numero massimo di rilanci che possono essere effettuati da un singolo partecipante (intero);
+* max_prezzo_asta: il prezzo massimo che può raggiungere l'asta (intero).
+
 Di seguito riportiamo un esempio di payload valido:
 ```bash
 {
@@ -140,7 +150,7 @@ I controlli effettuati sono:
 * l'utente non deve aver raggiunto il numero massimo di puntate;
 * l'utente deve possedere abbastanza credito per poter rilanciare all'asta;
 
-Terminato il timer descritto nel precendente punto avviene l'assegnazione del vincitore.
+Terminato il timer descritto nel precedente punto avviene l'assegnazione del vincitore.
 Si aggiudica l'asta l'utente che ha effettuato più rilanci.
 In caso di parità si aggiudica l'asta chi ha rilanciato per ultimo.
 Al termine viene scalato il credito all'utente vincitore e l'asta passa nello stato "terminata".
@@ -334,7 +344,7 @@ Nel nostro caso è stato utilizzato questo pattern per creare la risposta HTTP d
 ![image](https://user-images.githubusercontent.com/86314085/175777426-318d3fa9-2218-4725-877a-a1b0d74e90ec.png)
 
 **• Factory** : fa parte della famiglia dei pattern creazionali, ci consente di creare oggetti senza esporre la logica di creazione al client e ci riferiamo all'oggetto appena creato utilizzando un'interfaccia comune.
-Tramite questo pattern si crea una famiglia di oggetti, incapsulando i comporamenti di interesse.
+Tramite questo pattern si crea una famiglia di oggetti, incapsulando i comportamenti di interesse.
 Abbiamo 4 classi:
  * Creator: contiene il factory method;
  * ConcreteCreator: fa ritornare l'oggetto; 
@@ -384,4 +394,8 @@ docker-compose up
 
 
 ## Test
-Per effettuare il Test del seguente progetto, abbiamo importato il file .json nella directory, che a sua volta dovrà essere importato all'interno dell'app Postman.
+Per effettuare il Test del seguente progetto, abbiamo importato il file `Aste_Snap_Testing.postman_collection.json` nella directory, che a sua volta dovrà essere importato all'interno dell'app Postman.
+
+## Ringraziamenti
+
+[W001260] - PROGRAMMAZIONE AVANZATA - Professor **Adriano Mancini**

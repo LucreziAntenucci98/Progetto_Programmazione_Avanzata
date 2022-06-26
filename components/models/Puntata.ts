@@ -105,7 +105,6 @@ export async function getPuntateByIdAsta(id_asta:number):Promise<any>{
     }).then((data:any)=>{
         return data;
     });
-    console.log(puntate);
     return puntate;
 }
 
@@ -146,6 +145,7 @@ export async function visualizzaElencoRilanciVal(req: any):Promise<any>{
     });
 
     if(!asta) return new Error("Asta non esistente");
+    if(asta.stato !== "rilancio") return new Error("L'asta non è in fase di rilancio");
     if(user.ruolo === "admin") 
         return new Error("L'utente deve avere un ruolo di bid_partecipant o di bid_creator");
         

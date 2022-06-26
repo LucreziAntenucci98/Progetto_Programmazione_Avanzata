@@ -1,5 +1,5 @@
 require('dotenv').config();
-import * as logger from "../utils/Logger";
+import * as logger from "../utils/logger";
 const jwt = require('jsonwebtoken');
 /**
  * Funzione che va ad inserire nella richiesta la data e l'ora attuale.
@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
  */
 export const requestTime = (req,res,next) =>{
     req.requestTime = Date.now();
-    logger.logInfo("Inizio processamento richiesta\n");
+    logger.logInfo("Inizio processamento richiesta");
     next();
 };
 
@@ -41,7 +41,6 @@ export const checkHeader = (req,res,next) => {
 export const verifyAndAuthenticate = (req,res,next) => {
     try{
         let decoded = jwt.verify(req.token, process.env.SECRET_KEY);
-        console.log(decoded);
         if(decoded !== null){
             req.body = decoded;
             next();

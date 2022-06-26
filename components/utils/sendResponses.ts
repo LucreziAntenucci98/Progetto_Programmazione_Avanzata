@@ -6,11 +6,12 @@ import { ResponseHttpBuilder } from "../response/ResponseHttpBuilder";
 export const sendSuccessReponsePOST = (res:any) => {
     res.header("Content-Type", "application/json");
     const response = new ResponseHttpBuilder();
-    let json = JSON.stringify(response.setStatusCode(res.status_code)
+    if(res.data!=null) response.setData(res.data);
+    let jsonResponse = JSON.stringify(response.setStatusCode(res.status_code)
             .setStatus(res.status_message)
             .setMessage(res.message)
             .build());
-    res.status(res.status_code).send(json);
+    res.status(res.status_code).send(jsonResponse);
 };
 /**
  * Invio della risposta in caso di successo (GET) 
@@ -19,12 +20,12 @@ export const sendSuccessReponsePOST = (res:any) => {
 export const sendSuccessReponseGET = (res:any) => {
     res.header("Content-Type", "application/json");
     const response = new ResponseHttpBuilder();
-    let json = JSON.stringify(response.setStatusCode(res.status_code)
+    let jsonResponse = JSON.stringify(response.setStatusCode(res.status_code)
             .setStatus(res.status_message)
             .setMessage(res.message)
             .setData(res.data)
             .build());
-    res.status(res.status_code).send(json);
+    res.status(res.status_code).send(jsonResponse);
 };
 
 /**
@@ -34,10 +35,10 @@ export const sendSuccessReponseGET = (res:any) => {
 export const sendErrorMessage = (res:any) => {
     res.header("Content-Type", "application/json");
     const response = new ResponseHttpBuilder();
-    let json = JSON.stringify(response.setStatusCode(res.status_code)
+    let jsonResponse = JSON.stringify(response.setStatusCode(res.status_code)
             .setStatus(res.status_message)
             .setMessage(res.message)
             .build());
-    res.status(res.status_code).send(json);
+    res.status(res.status_code).send(jsonResponse);
 }
 

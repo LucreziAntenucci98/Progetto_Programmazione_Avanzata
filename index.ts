@@ -6,12 +6,10 @@ import * as express from "express";
 import {errorHandler} from "./components/middleware/middlewareErrorHandler";
 import {OBAsta} from "./components/observer/observer"
 import { ResponseHttpBuilder } from "./components/response/ResponseHttpBuilder";
-/**
- * Sequenza codice
- */
+import { Asta } from "./components/models/Asta";
 
+//Lista dei subject
 export let subjectList: Array<OBAsta> = [];
-
 // Costanti
 const PORT = 8080;
 const HOST = '0.0.0.0';
@@ -20,7 +18,7 @@ const HOST = '0.0.0.0';
 const app = express();
 
 //Rotta pubblica per la visualizzazione delle aste filtrando per lo stato con il metodo GET
-app.get('/VisualizzaAsteByStato',validation.visualizzaAsteByStatoVal, errorHandler, (req, res) => {
+app.get('/visualizzaAsteByStato',validation.visualizzaAsteByStatoVal, errorHandler, (req, res) => {
        sendResponses.sendSuccessReponseGET(res);
 });
 

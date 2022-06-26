@@ -1,4 +1,5 @@
-import * as logger from "../utils/Logger";
+import * as logger from "../utils/logger";
+import { sendErrorMessage } from "../utils/sendResponses";
 /**
  * Funzione che gestisce le eccezioni e scrive sul file di log
  * @param err identifica l'errore/eccezione della richiesta
@@ -7,10 +8,13 @@ import * as logger from "../utils/Logger";
  * @param next passa al prossimo middleware
  */
 export const errorHandler = (err,req,res,next) => { 
-    console.log("test");
     //scrittura del file di log
-    logger.logInfo("Fine processamento richiesta\n");
-    logger.logError(err.stack+"\n");
-    res.header("Content-Type", "application/json");
-    res.status(500).send({"error": err.message});
+    logger.logInfo("Fine processamento richiesta - Error");
+    logger.logError(err.stack);
+    res.message = err.message;
+    if(res.status_code == null){
+        res.status_code = 401;
+        res.status_message = "Unauthorized";
+    }
+    sendErrorMessage(res);
 }

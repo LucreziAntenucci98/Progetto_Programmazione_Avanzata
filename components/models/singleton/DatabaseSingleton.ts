@@ -23,6 +23,7 @@ export class DatabaseSingleton {
                 timezone: "+4:00"
               },
               timezone: "+4:00",
+            logging:false
 		});
 	}
 

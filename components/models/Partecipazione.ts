@@ -3,6 +3,7 @@ import { DataTypes, Model, Op, Sequelize } from 'sequelize';
 import { checkUserExistence, User } from "./User";
 import { Asta, checkAstaExistence } from "./Asta";
 import { subjectList } from "../..";
+import { OBAsta, RaggiungimentoPartecipanti } from "../observer/observer";
 
 const sequelize: Sequelize = DatabaseSingleton.getInstance().getConnessione();
 
@@ -104,7 +105,19 @@ export async function validatorInsertPartecipazione(partecipazione:any):Promise<
 
     //Safe zone
     await Asta.increment(['num_attuale_partecipanti'],{by: 1,where:{id_asta: asta.id_asta}}).then(() => { 
-        subjectList[asta.id_asta-1].AggiuntaPartecipante();
+        let listaFiltrata: OBAsta[];
+        if(subjectList.length != 0) listaFiltrata = subjectList.filter((element) => { return(element.id_asta === asta.id_asta)} );
+        //Nel caso di riavvio del sistema, la subjectList è vuota quindi bisogna aggiungere
+        //l'asta per poterla monitorare 
+        if(listaFiltrata.length==0){
+            const subject = new OBAsta(asta.id_asta,asta.min_partecipanti,asta.durata_asta_minuti);
+            subjectList.push(subject)
+            //Viene creato l'observer che verrà "attaccato" al subject
+            const observer = new RaggiungimentoPartecipanti();
+            listaFiltrata = subjectList.filter((element) => { return (element.id_asta === asta.id_asta) } )
+            listaFiltrata[0].attach(observer);
+        }
+        listaFiltrata[0].AggiuntaPartecipante();
     });
     await User.decrement(['credito'],{by: asta.quota_partecipazione,where:{username: user.username}});
     
@@ -113,7 +126,7 @@ export async function validatorInsertPartecipazione(partecipazione:any):Promise<
 /**
  * Funzione che permette di ottenere le partecipazioni delle aste effettuate dagli utenti
  * @param username identifica il nome dell'utente
- * @returns il numero di partecipazioni dell'utente suddividendole in
+ * @returns le partecipazioni dell'utente suddividendole tra le
  * aste vinte e aste non vinte
  */
 export async function getPartecipazioniByUsername(username) {
@@ -133,13 +146,30 @@ export async function getPartecipazioniByUsername(username) {
 }
 
 /**
+ * Funzione che permette di ottenere la partecipazione dell'utente per una particolare asta
+ * @param username identifica il nome dell'utente
+ * @param id_asta identifica l'id dell'asta
+ * @returns la partecipazione dell'utente
+ */
+ export async function getPartecipazioniByUsernameIdAsta(username,id_asta) {
+    
+    let partecipazioni:any[] = await Partecipazione.findAll({where:
+            {username:username,
+             id_asta:id_asta
+            },
+            raw:true
+    }).then((partecipazioni:any[])=> {return partecipazioni});
+    return partecipazioni[0];
+}
+
+/**
  * Funzione asincrona che filtra le partecipazioni per data_inizio e data_fine
  * @param data contiene data_inizio e data_fine
  * @returns  tutte le partecipazioni effettuate in un intervallo di tempo ordinandole 
  * per data di partecipazione
  */
 
-export async function filterPartecipazioniByDate(data:any):Promise<any>{
+export async function filterPartecipazioniByDate(data:any):Promise<any[]>{
     return await Partecipazione.findAll({
         where: {
           username: data.username,
@@ -147,6 +177,7 @@ export async function filterPartecipazioniByDate(data:any):Promise<any>{
             [Op.between]: [data.data_inizio, data.data_fine],
           },
         },
+        attributes: ['id_partecipazione', 'spesa_partecipazione', 'timestamp_partecipazione' ],
         order: ['timestamp_partecipazione'],
     });
 
