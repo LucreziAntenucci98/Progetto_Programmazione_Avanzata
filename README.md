@@ -37,6 +37,10 @@ Le specifiche richieste per l'implementazione sono:
 
 Ogni azione corrisponde a una differente richiesta HTTP (GET o POST) che deve essere, o meno, autenticata tramite token JWT.
 
+I token JWT sono stati generati tramite il seguente sito:
+* [JWT.io](https://jwt.io/) utilizzando la chiave segreta "secretkey".
+
+
 ## Strumenti Utilizzati 
 
 * [Visual Studio Code](https://code.visualstudio.com/)
@@ -161,7 +165,7 @@ Le verifiche effettuate per questa rotta sono:
 * controllo sull'esistenza e ruolo dell'utente Admin;
 * controllo sull'esistenza e ruolo dell'utente bid-partecipant da ricaricare;
 
-Di seguito riportiamo un esempio di paylod valido:
+Di seguito riportiamo un esempio di payload valido:
 ```bash
 {
   "username_admin": "admin",
@@ -215,6 +219,8 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkiLCJ
 
 Rotta che permette di visualizzare lo storico delle aste con il ruolo bid-partecipant.
 Il controllo effettuato in questa rotta è stato quello di verificare se l'utente esiste ed ha il ruolo di bid-partecipant.
+
+Di seguito riportiamo un esempio di payload valido:
 
 ```bash
 {
