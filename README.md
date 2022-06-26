@@ -85,7 +85,7 @@ Il payload della rotta /creaAsta contiene i campi:
 * durata_asta_minuti: durata della fase di rilancio in minuti (float);
 * incremento_puntata: l'incremento del prezzo dell'asta ogni volta che un utente iscritto rilancia (intero);
 * max_n_puntate_partecipante: il numero massimo di rilanci che possono essere effettuati da un singolo partecipante (intero);
-* max_prezzo_asta: il prezzo massimo che può raggiungere l'asta (intero).
+* max_prezzo_asta: il prezzo massimo che può raggiungere l'asta (intero). E' consigliabile che il prezzo massimo dell'asta sia inferiore al seguente prodotto --> max_partecipanti * quota_partecipazione * max_n_puntate_partecipante.
 
 Di seguito riportiamo un esempio di payload valido:
 ```bash
