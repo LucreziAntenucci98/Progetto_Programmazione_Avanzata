@@ -101,7 +101,7 @@ Di seguito riportiamo un esempio di payload valido inserito nel body della richi
   "max_prezzo_asta": 125
 }
 ```
-token JWT Valido (admin): 
+token JWT Valido (bid_creator): 
 
 ```bash
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX2NyZWF0b3IiLCJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkifQ.l3ujA6GhCI46762IoJvZjtyRcT78HOCtpxib7Y6lLTo
