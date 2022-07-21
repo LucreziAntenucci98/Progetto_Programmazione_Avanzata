@@ -2,8 +2,9 @@
 
 ## Team
 
-**• Antenucci Lucrezia** \
-**• Leli Samuele**
+**• [Antenucci Lucrezia](https://github.com/LucreziAntenucci98)** \
+**• [Leli Samuele](https://github.com/samueleleli)**
+
 
 ## Obiettivo del Progetto
 
@@ -87,10 +88,9 @@ Il payload della rotta /creaAsta contiene i campi:
 * max_n_puntate_partecipante: il numero massimo di rilanci che possono essere effettuati da un singolo partecipante (intero);
 * max_prezzo_asta: il prezzo massimo che può raggiungere l'asta (intero). E' consigliabile che il prezzo massimo dell'asta sia inferiore al seguente prodotto --> max_partecipanti * quota_partecipazione * max_n_puntate_partecipante.
 
-Di seguito riportiamo un esempio di payload valido:
+Di seguito riportiamo un esempio di payload valido inserito nel body della richiesta in formato JSON:
 ```bash
 {
-  "username_creator": "andrea_felicetti",
   "nome_oggetto": "smartphone",
   "min_partecipanti": 2,
   "max_partecipanti": 5,
@@ -101,10 +101,10 @@ Di seguito riportiamo un esempio di payload valido:
   "max_prezzo_asta": 125
 }
 ```
-token JWT: 
+token JWT Valido (admin): 
 
 ```bash
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9jcmVhdG9yIjoiYW5kcmVhX2ZlbGljZXR0aSIsIm5vbWVfb2dnZXR0byI6InNtYXJ0cGhvbmUiLCJtaW5fcGFydGVjaXBhbnRpIjoyLCJtYXhfcGFydGVjaXBhbnRpIjo1LCJxdW90YV9wYXJ0ZWNpcGF6aW9uZSI6NSwiZHVyYXRhX2FzdGFfbWludXRpIjoxLCJpbmNyZW1lbnRvX3B1bnRhdGEiOjUsIm1heF9uX3B1bnRhdGVfcGFydGVjaXBhbnRlIjo1LCJtYXhfcHJlenpvX2FzdGEiOjEyNX0.ZNNWcK8esgy_6JTl8W0Rz3JvoMZdkxYZPuKxG4wfGhk
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX2NyZWF0b3IiLCJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkifQ.l3ujA6GhCI46762IoJvZjtyRcT78HOCtpxib7Y6lLTo
 ```
 
 ### 2. /partecipaAsta
@@ -126,17 +126,16 @@ di durata pari a quella impostata dal creatore dell'asta.
 L'asta quindi passa in stato di "rilancio" e gli utenti partecipanti possono effettuare i loro rilanci.
 
 
-Di seguito riportiamo un esempio di payload valido:
+Di seguito riportiamo un esempio di payload valido inserito nel body della richiesta in formato JSON:
 
 ```bash
 {
-  "username": "sam_leli",
   "id_asta": 1
 }
 ```
-token JWT:
+token JWT Valido (bid_partecipant):
 ```bash
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc
 ```
 
 ### 3. /rilancia
@@ -155,17 +154,16 @@ Si aggiudica l'asta l'utente che ha effettuato più rilanci.
 In caso di parità si aggiudica l'asta chi ha rilanciato per ultimo.
 Al termine viene scalato il credito all'utente vincitore e l'asta passa nello stato "terminata".
 
+Di seguito riportiamo un esempio di payload valido inserito nel body della richiesta in formato JSON:
 
-Di seguito riportiamo un esempio di payload valido:
 ```bash
 {
-  "username": "sam_leli",
   "id_asta": 1
 }
 ```
-token JWT: 
+token JWT Valido: 
 ```bash
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc
 
 ```
 
@@ -175,33 +173,25 @@ Le verifiche effettuate per questa rotta sono:
 * controllo sull'esistenza e ruolo dell'utente Admin;
 * controllo sull'esistenza e ruolo dell'utente bid-partecipant da ricaricare;
 
-Di seguito riportiamo un esempio di payload valido:
+Di seguito riportiamo un esempio di payload valido inserito nel body della richiesta in formato JSON:
 ```bash
 {
-  "username_admin": "admin",
   "username_destinatario": "sam_leli",
   "quantita": 200
 }
 ```
-Token JWT:
+Token JWT Valido (admin):
 ```bash
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9hZG1pbiI6ImFkbWluIiwidXNlcm5hbWVfZGVzdGluYXRhcmlvIjoic2FtX2xlbGkiLCJxdWFudGl0YSI6MjAwfQ.VJY54ZYYGvcUz3PaU5OxwE0bJlxxOk3kuZO-gfGQqRA
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.u2wXyylo7ar0i5gOkJl-QOE7EM5KWXNmh2rhutxx_vI
 ```
 
 ### 5. /verificaCreditoResidio
 Rotta che permette ad un utente bid-partecipant di poter verificare il proprio credito residuo.
 Il controllo effettuato su questa rotta è stato quello di verificare l'esistenze del ruolo bid-partecipant.
 
-Di seguito un esmepio di payload valido:
-
+Token JWT Valido (bid_partecipant):
 ```bash
-{
-  "username": "sam_leli"
-}
-```
-Token JWT:
-```bash
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIn0.zYWBd7lBhdu2ApNkdofgbxKX3f-qwhWbf0sqSzh-NkI
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc
 ```
 
 ### 6. /elencoRilanci
@@ -213,16 +203,16 @@ I controlli effettuati sono:
 * se l'utente è bid-creator allora deve essere il creatore dell'asta;
 * se l'utente è bid-partecipant allora deve essere un partecipante all'asta.
 
-Di seguito riportiamo un esempio di payload valido (in questo caso bid-creator):
+Di seguito riportiamo un esempio di payload valido inserito nel body della richiesta in formato JSON:
+
 ```bash
 {
-  "username": "andrea_felicetti",
   "id_asta": 1
 }
 ```
-Token JWT
+Token JWT Valido (bid_creator):
 ```bash
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkiLCJpZF9hc3RhIjoxfQ.TKpReZ9OvWkWpt8OKAmJYYd09k7DjHQ7zz10MXKiSwc
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX2NyZWF0b3IiLCJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkifQ.l3ujA6GhCI46762IoJvZjtyRcT78HOCtpxib7Y6lLTo
 ```
 
 ### 7. /storicoAste
@@ -230,45 +220,36 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkiLCJ
 Rotta che permette di visualizzare lo storico delle aste con il ruolo bid-partecipant.
 Il controllo effettuato in questa rotta è stato quello di verificare se l'utente esiste ed ha il ruolo di bid-partecipant.
 
-Di seguito riportiamo un esempio di payload valido:
-
+Token JWT Valido (bid_partecipant):
 ```bash
-{
-  "username": "sam_leli"
-}
-```
-Token JWT:
-```bash
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIn0.zYWBd7lBhdu2ApNkdofgbxKX3f-qwhWbf0sqSzh-NkI
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc
 ```
 
 ### 8. /speseEffettuate
 Rotta che permette di visualizzare tutte le spese effettuate durante le partecipazioni alle aste in un dato periodo con il ruolo bid-partecipant.
 Il controllo effettuato in questa rotta è stato quello di verificare se l'utente esiste ed ha il ruolo di bid-partecipant.
 
-Di seguito di riporta un esempio di payload valido:
+Di seguito riportiamo un esempio di payload valido inserito nel body della richiesta in formato JSON:
 
 ```bash
 {
-  "username": "sam_leli",
   "data_inizio": "2022-06-24T01:00:00+01:00",
   "data_fine": "2022-07-07T17:00:00+01:00"
 }
 ```
 
-Token JWT:
+Token JWT Valido (bid_partecipant):
 ```bash
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiZGF0YV9pbml6aW8iOiIyMDIyLTA2LTI0VDAxOjAwOjAwKzAxOjAwIiwiZGF0YV9maW5lIjoiMjAyMi0wNy0wN1QxNzowMDowMCswMTowMCJ9.wmnOrkFFvqN4ZOKEMX_e7YiCaoOwtDdZuzCRGudgkZs
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc
 ```
 
 ### 9. /stats
 Rotta per visualizzare le statistiche sulle aste in un dato periodo temporale.
 La verifica che viene effettuata è sull'esistenza e sul ruolo di Admin dell'utente.
 
-Di seguito si riporta un esempio di payload valido:
+Di seguito riportiamo un esempio di payload valido inserito nel body della richiesta in formato JSON:
 ```bash
 {
-  "username": "admin",
   "data_inizio": "2022-06-24T01:00:00+01:00",
   "data_fine": "2022-07-07T17:00:00+01:00"
 }
@@ -276,7 +257,7 @@ Di seguito si riporta un esempio di payload valido:
 
 Token JWT:
 ```bash
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZGF0YV9pbml6aW8iOiIyMDIyLTA2LTI0VDAxOjAwOjAwKzAxOjAwIiwiZGF0YV9maW5lIjoiMjAyMi0wNy0wN1QxNzowMDowMCswMTowMCJ9.YM3PBg8gzeVWgMC05Vv8wJAWnBy9I_N9iV9nnXCx0b8
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.u2wXyylo7ar0i5gOkJl-QOE7EM5KWXNmh2rhutxx_vI
 ```
 
 ### 10. /visualizzaAsteByStato
