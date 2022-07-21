@@ -4,6 +4,8 @@ import { checkUserExistence, User } from "./User";
 import { Asta, checkAstaExistence } from "./Asta";
 import { subjectList } from "../..";
 import { OBAsta, RaggiungimentoPartecipanti } from "../observer/observer";
+import { ErrorMsgEnum } from "../msgResponse/ErrorMsg";
+import * as logger from "../utils/logger";
 
 const sequelize: Sequelize = DatabaseSingleton.getInstance().getConnessione();
 
@@ -65,8 +67,8 @@ export async function checkPartecipazioneExistence(partecipazione:any):Promise<a
             {id_asta: partecipazione.id_asta,
              username:partecipazione.username},
         });
-    }catch(error){
-        console.log(error);
+    }catch(error) {
+        logger.logError(error.stack)
     }
     return result;
 };
@@ -83,25 +85,25 @@ export async function validatorInsertPartecipazione(partecipazione:any):Promise<
         if(user) return user;
         else return false;
     });
-    if(!user ) return new Error("Utente non esistente");
-    if(user.ruolo !== "bid_partecipant") return new Error("L'utente deve avere il ruolo di bid_partecipant");
+    if(!user ) return ErrorMsgEnum.UtenteNonEsiste;
+    if(user.ruolo !== "bid_partecipant") return ErrorMsgEnum.AstaNoStatoCorretto;
     
     const asta = await checkAstaExistence(partecipazione.id_asta).then((asta) => { 
         if(asta) return asta;
         else return false;
     });
 
-    if(!asta ) return new Error("L'asta non esiste");
-    if((asta.quota_partecipazione + asta.max_prezzo_asta) > user.credito) return new Error("Non hai credito sufficiente per eseguire l'operazione");
-    if(asta.num_attuale_partecipanti === asta.max_partecipanti) return new Error("Non ci sono posti disponibili");
-    if(asta.stato === "creata" || asta.stato === "terminata" ) return new Error("L'asta non è in fase di aperta o di rilancio");
+    if(!asta ) return ErrorMsgEnum.AstaNonEsiste;
+    if((asta.quota_partecipazione + asta.max_prezzo_asta) > user.credito) return ErrorMsgEnum.NoCredito;
+    if(asta.num_attuale_partecipanti === asta.max_partecipanti) return ErrorMsgEnum.NoPostiDisponibili;
+    if(asta.stato === "creata" || asta.stato === "terminata" ) return ErrorMsgEnum.AstaNoStatoCorretto;
 
     const partecipazioneObj = await checkPartecipazioneExistence(partecipazione).then((partecipazione) => { 
         if(partecipazione) return partecipazione;
         else return false;
     });
 
-    if(partecipazioneObj.length != 0) return new Error("L'utente è gia iscritto");
+    if(partecipazioneObj.length != 0) return ErrorMsgEnum.UtenteGiaIscritto;
 
     //Safe zone
     await Asta.increment(['num_attuale_partecipanti'],{by: 1,where:{id_asta: asta.id_asta}}).then(() => { 

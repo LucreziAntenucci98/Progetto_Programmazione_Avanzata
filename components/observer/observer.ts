@@ -1,7 +1,7 @@
-import * as AstaClass from "../models/Asta";
-import { Partecipazione } from "../models/Partecipazione";
-import { Puntata } from "../models/Puntata";
-import { User } from "../models/User";
+import * as AstaClass from "../modelsDB/Asta";
+import { Partecipazione } from "../modelsDB/Partecipazione";
+import { Puntata } from "../modelsDB/Puntata";
+import { User } from "../modelsDB/User";
 import * as logger from "../utils/logger"
 
 /**

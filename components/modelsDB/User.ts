@@ -1,5 +1,7 @@
 import { DatabaseSingleton } from "./singleton/DatabaseSingleton";
 import { DataTypes, Sequelize } from 'sequelize';
+import { ErrorMsgEnum } from "../msgResponse/ErrorMsg";
+import * as logger from "../utils/logger";
 
 const sequelize: Sequelize = DatabaseSingleton.getInstance().getConnessione();
 
@@ -37,17 +39,15 @@ export const User = sequelize.define('users', {
         if(user) return user;
         else return false;
     });
-    if(!userAdmin ) return new Error("Utente non esistente");
-    if(userAdmin.ruolo !== "admin") return new Error("L'utente deve avere ruolo admin");
+    if(!userAdmin ) return ErrorMsgEnum.UtenteNonEsiste;
+    if(userAdmin.ruolo !== "admin") return ErrorMsgEnum.NoPermessi;
 
     const userDestinatario = await checkUserExistence(ricarica.username_destinatario).then((user) => { 
         if(user) return user;
         else return false;
     });
-    if(!userDestinatario ) return new Error("L'utente destinatario non esiste");
-    if(userDestinatario.ruolo !== "bid_partecipant") return new Error("L'utente destinatario deve avere ruolo bid_partecipant");
-
-    await User.increment(['credito'],{by: ricarica.quantita,where:{username: ricarica.username_destinatario}})
+    if(!userDestinatario ) return ErrorMsgEnum.UtenteNonEsiste;
+    if(userDestinatario.ruolo !== "bid_partecipant") return ErrorMsgEnum.NoPermessi;
     
     return true;
 }
@@ -62,7 +62,7 @@ export async function checkUserExistence(username:string):Promise<any> {
     try{
         result = await User.findByPk(username,{raw:true});
     }catch(error){
-        console.log(error);
+        logger.logError(error.stack)
     }
     return result;
 };
@@ -77,7 +77,7 @@ export async function userIsAdmin(username:string):Promise<boolean> {
     try{
         user = await User.findByPk(username,{raw:true});
     }catch(error){
-        console.log(error);
+        logger.logError(error.stack)
     }
     if(!user) return false;
     if(user.ruolo == "admin") return user;
@@ -94,7 +94,7 @@ export async function userIsBidPartecipant(username:string):Promise<any> {
     try{
         user = await User.findByPk(username,{raw:true});
     }catch(error){
-        console.log(error);
+        logger.logError(error.stack)
     }
     if(!user) return false;
     if(user.ruolo == "bid_partecipant") return user;
@@ -111,7 +111,7 @@ export async function userIsBidCreator(username:string):Promise<any> {
     try{
         user = await User.findByPk(username,{raw:true});
     }catch(error){
-        console.log(error);
+        logger.logError(error.stack)
     }
     if(!user) return false;
     if(user.ruolo == "bid_creator") return user;

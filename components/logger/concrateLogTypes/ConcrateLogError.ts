@@ -39,7 +39,6 @@ export class ConcrateLogError implements LogMsg {
             flag: "a+"
         },(err) => {
             if (err) throw err;
-            console.log('Scrittura sul file di log Error');
         });
     }
 }

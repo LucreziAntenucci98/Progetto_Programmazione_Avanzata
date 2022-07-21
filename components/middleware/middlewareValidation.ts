@@ -1,10 +1,12 @@
 //Import delle classi e moduli
-import * as UserClass from "../models/User";
-import * as AstaClass from "../models/Asta";
-import * as PartecipazioneClass from "../models/Partecipazione";
+import * as UserClass from "../modelsDB/User";
+import * as AstaClass from "../modelsDB/Asta";
+import * as PartecipazioneClass from "../modelsDB/Partecipazione";
 import * as formatRequestValidator from "../utils/formatRequestValidator"
-import * as PuntataClass from "../models/Puntata"
+import * as PuntataClass from "../modelsDB/Puntata"
 import * as logger from "../utils/logger";
+import { ErrorMsgEnum } from "../msgResponse/ErrorMsg";
+import { User } from "../modelsDB/User";
 const { Op } = require("sequelize");
 
 
@@ -15,30 +17,18 @@ const { Op } = require("sequelize");
  * @param next passa al prossimo middleware
  */
 export async function insertBidVal (req:any,res:any,next:any){
-    let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataAsta(req.body)){
-            errorResp = new Error("Errore di formattazione del payload")
-            res.status_code = 400;
-            res.status_message = "Bad Request";
+        req.body.username_creator = req.user;
+        if(formatRequestValidator.validateRawDataAsta(req.body)){
+            let responseVal = await AstaClass.validatorInsertAsta(req.body);
+            responseVal === true ? next() : next(responseVal)
+        }else{
+            next(ErrorMsgEnum.BadFormattedData)
         }
-        else{
-            errorResp = await AstaClass.validatorInsertAsta(req.body);
-            if(!(errorResp instanceof Error)){
-                await AstaClass.Asta.create(req.body).then((asta:any) =>{
-                    logger.logInfo(`L'asta con id ${asta.id_asta} è stata creata`)
-                    res.message = "Asta creata";
-                    res.status_code = 201;
-                    res.status_message = "Created";
-                    res.data = {"id_asta":asta.id_asta};
-                    next();
-                });
-            }
-        } 
     }catch(error){
-        next(error)
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal)
     }
-    next(errorResp);
 };
 /**
  * Funzione asincrona per validare la richiesta di partecipazione ad un'asta
@@ -47,34 +37,18 @@ export async function insertBidVal (req:any,res:any,next:any){
  * @param next passa al prossimo middleware
  */
 export async function partecipaAstaVal(req:any,res:any,next:any) {
-    let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataPartecipazione(req.body)){
-            errorResp = new Error("Errore di formattazione del payload")
-            res.status_code = 400;
-            res.status_message = "Bad Request";
-        }
+        req.body.username = req.user;
+        if(!formatRequestValidator.validateRawDataPartecipazione(req.body))
+            next(ErrorMsgEnum.BadFormattedData)
         else{
-            errorResp = await PartecipazioneClass.validatorInsertPartecipazione(req.body);
-            if(!(errorResp instanceof Error)){
-                const asta = await AstaClass.Asta.findByPk(req.body.id_asta,{raw:true}).then((result:any) => {
-                    return result;
-                });
-                const quota_partecipazione = asta.quota_partecipazione;
-                req.body.spesa_partecipazione = quota_partecipazione;
-                await PartecipazioneClass.Partecipazione.create(req.body).then(() =>{
-                    logger.logInfo(`L'utente ${req.body.username} partecipa all'asta ${req.body.id_asta}`);
-                    res.message = "Iscrizione all'asta avvenuta con successo";
-                    res.status_code = 200;
-                    res.status_message = "OK";
-                    next();
-                });
-            }
+            let responseVal = await PartecipazioneClass.validatorInsertPartecipazione(req.body);
+            responseVal === true ? next() : next(responseVal)
         } 
     }catch(error){
-        next(error)
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal)
     }
-    next(errorResp);
 };
 /**
  * Funzione asincrona che valida la puntata effettuata durante l'asta
@@ -83,46 +57,18 @@ export async function partecipaAstaVal(req:any,res:any,next:any) {
  * @param next passa al prossimo middleware
  */
 export async function puntataVal(req:any,res:any,next:any)  {
-    let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataPartecipazione(req.body)){
-            errorResp = new Error("Errore di formattazione del payload")
-            res.status_code = 400;
-            res.status_message = "Bad Request";
+        req.body.username = req.user;
+        if(formatRequestValidator.validateRawDataPartecipazione(req.body)){
+            let responseVal = await PuntataClass.validatorInsertPuntata(req.body);
+            responseVal === true ? next() : next(responseVal)
+        }else{
+            next(ErrorMsgEnum.BadFormattedData)
         }
-        else{
-            errorResp = await PuntataClass.validatorInsertPuntata(req.body);
-            if(!(errorResp instanceof Error)){
-                logger.logInfo(`L'utente ${req.body.username} rilancia all'asta ${req.body.id_asta}`);
-                
-                await PartecipazioneClass.Partecipazione.increment(
-                    ['contatore_puntate'],
-                    {
-                     by: 1,
-                     where:{
-                        id_asta: req.body.id_asta,
-                        username: req.body.username
-                     }
-                });
-                let partecipazione = await PartecipazioneClass.getPartecipazioniByUsernameIdAsta(req.body.username,req.body.id_asta);
-                let asta = await AstaClass.checkAstaExistence(req.body.id_asta);
-                req.body.id_partecipazione = partecipazione.id_partecipazione;
-                await PuntataClass.Puntata.create(req.body).then(() =>{
-                    res.message = "Rilancio avvenuto con successo";
-                    res.status_code = 200;
-                    res.status_message = "OK";
-                    res.data={
-                        "id_asta":req.body.id_asta,
-                        "puntate_rimaste":asta.max_n_puntate_partecipante - partecipazione.contatore_puntate
-                    }
-                    next();
-                });
-            }
-        } 
     }catch(error){
-        next(error)
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal)
     }
-    next(errorResp);
 };
 /**
  * Funzione asincrona che effettua la validazione della ricarica da utente ADMIN a "Giocatore"
@@ -131,28 +77,18 @@ export async function puntataVal(req:any,res:any,next:any)  {
  * @param next passa al prossimo middleware
  */
 export async function ricaricaUtenteVal(req:any,res:any,next:any)  {
-    let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataRicaricaCredito(req.body)){
-            errorResp = new Error("Errore di formattazione del payload")
-            res.status_code = 400;
-            res.status_message = "Bad Request";
+        req.body.username_admin = req.user;
+        if(formatRequestValidator.validateRawDataRicaricaCredito(req.body)){
+            let responseVal = await UserClass.validatorRicaricaUtente(req.body);
+            responseVal === true ? next() : next(responseVal)
+        }else{
+            next(ErrorMsgEnum.BadFormattedData)
         }
-        else{
-            errorResp = await UserClass.validatorRicaricaUtente(req.body); 
-            if(!(errorResp instanceof Error)){
-                logger.logInfo(`L'utente ${req.body.username} è stato ricaricaricato di ${req.body.quantita} token`);
-                res.message = "Ricarica Utente avvenuta con successo";
-                res.status_code = 200;
-                res.status_message = "OK";
-                res.data = {"valore_ricarica":req.body.quantita};
-                next();
-            }
-        } 
     }catch(error){
-        next(error)
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal)
     }
-    next(errorResp);
 };
 /**
  * Funzione asincrona che valida la richiesta di controllo del credito residuo 
@@ -161,34 +97,20 @@ export async function ricaricaUtenteVal(req:any,res:any,next:any)  {
  * @param next passa al prossimo middleware
  */
 export async function verificaCreditoResiduoVal(req:any,res:any,next:any) {
-    let errorResp:any;
     try{
-        if(typeof req.body.username != "string"){
-            errorResp = new Error("Errore di formattazione del payload")
-            res.status_code = 400;
-            res.status_message = "Bad Request";
-        }
-        else{
+        req.body.username = req.user;
+        if(typeof req.body.username == "string"){
             const user = await UserClass.userIsBidPartecipant(req.body.username).then((user) => { 
                 return user;
             });
-            if(user){
-                res.message = "Richiesta avvenuta con successo";
-                res.status_code = 200;
-                res.status_message = "OK";
-                res.data = {"credito": user.credito};
-                next();
-            }
-            else{
-                errorResp = new Error("L'utente non è un bid_partecipant o non esiste");  
-            }
-        } 
-        if(errorResp instanceof Error)
-            next(errorResp);
+            user ? next() : next(ErrorMsgEnum.UtenteNonEsiste)
+        }else{
+            next(ErrorMsgEnum.BadFormattedData)
+        }
     }catch(error){
-        next(error);
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal)
     }
-    
 };
 /**
  * Funzione asincrona che valida l'elenco dei rilanci effettuati
@@ -197,29 +119,22 @@ export async function verificaCreditoResiduoVal(req:any,res:any,next:any) {
  * @param next passa al prossimo middleware
  */
 export async function elencoRilanciVal(req:any,res:any,next:any) {
-    let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataElencoRilanci(req.body)){
-            errorResp = new Error("Errore di formattazione del payload")
-            res.status_code = 400;
-            res.status_message = "Bad Request";
-        }
-        else{
-            let response = await PuntataClass.visualizzaElencoRilanciVal(req);
-            if(response instanceof Error){
-                errorResp = response;
-            } else{
-                res.message = "Richiesta avvenuta con successo";
-                res.status_code = 200;
-                res.status_message = "OK";
-                res.data = {"rilanci": response};
+        req.body.username = req.user;
+        if(formatRequestValidator.validateRawDataElencoRilanci(req.body)){
+            let responseVal = await PuntataClass.visualizzaElencoRilanciVal(req);
+            if(typeof responseVal !== "number"){
+                res.data = {"rilanci": responseVal};
                 next();
+            } else{
+                next(responseVal)
             }
+        }else{
+            next(ErrorMsgEnum.BadFormattedData)
         }
-        if(errorResp instanceof Error)
-            next(errorResp) 
     }catch(error){
-        next(error)
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal)
     }
 };
 /**
@@ -229,27 +144,11 @@ export async function elencoRilanciVal(req:any,res:any,next:any) {
  * @param next passa al prossimo middleware
  */
 export async function visualizzaAsteByStatoVal(req:any,res:any,next:any) {
-    let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawDataAstFilter(req.query)){
-            errorResp = new Error("Errore di formattazione del payload")
-            res.status_code = 400;
-            res.status_message = "Bad Request";
-        }
-        else{
-            await AstaClass.Asta.findAll({where:
-                {stato: req.query.stato},raw:true}).then((aste:any) =>{
-                res.message = "Richiesta avvenuta con successo";
-                res.status_code = 200;
-                res.status_message = "OK";
-                res.data = {"elenco_aste": aste};
-                next();
-            });
-        } 
-        if(errorResp instanceof Error)
-            next(errorResp) 
+        formatRequestValidator.validateRawDataAstFilter(req.query) ? next() : next(ErrorMsgEnum.BadFormattedData)
     }catch(error){
-        next(error)
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal)
     }
 };
 /**
@@ -260,37 +159,19 @@ export async function visualizzaAsteByStatoVal(req:any,res:any,next:any) {
  * @param next passa al prossimo middleware
  */
 export async function storicoAsteVal(req:any,res:any,next:any) {
-    let errorResp:any;
     try{
-        if(typeof req.body.username != "string"){
-            errorResp = new Error("Errore di formattazione del payload")
-            res.status_code = 400;
-            res.status_message = "Bad Request";
-        }
-        else{
+        req.body.username = req.user;
+        if(typeof req.body.username === "string"){
             const user = await UserClass.userIsBidPartecipant(req.body.username).then((user) => { 
                 return user;
             });
-            if(user){
-                await PartecipazioneClass.getPartecipazioniByUsername(req.body.username).then((result)=>{
-                    res.message = "Richiesta avvenuta con successo";
-                    res.status_code = 200;
-                    res.status_message = "OK";
-                    res.data = {"elenco_aste": {
-                        "aste_vinte":result.aste_vinte,
-                        "aste_perse":result.aste_perse,
-                    }};
-                    next();
-                });
-            }
-            else{
-                errorResp = new Error("Operazione non permessa");;
-            }
-        } 
-        if(errorResp instanceof Error)
-            next(errorResp);
+            user ? next() : next(ErrorMsgEnum.NoPermessi)
+        }else{
+            next(ErrorMsgEnum.BadFormattedData)
+        }
     }catch(error){
-        next(error)
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal)
     }
 };
 /**
@@ -300,42 +181,20 @@ export async function storicoAsteVal(req:any,res:any,next:any) {
  * @param next passa al prossimo middleware
  */
 export async function speseEffettuateVal(req:any,res:any,next:any) {
-    let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawTimeStampFilter(req.body)){
-            errorResp = new Error("Errore di formattazione del payload")
-            res.status_code = 400;
-            res.status_message = "Bad Request";
-        }
-        else{
+        req.body.username = req.user;
+        if(formatRequestValidator.validateRawTimeStampFilter(req.body)){
             const user = await UserClass.userIsBidPartecipant(req.body.username).then((user) => { 
                 return user;
             });
-            if(user){
-                await PartecipazioneClass.filterPartecipazioniByDate(req.body).then((partecipazioni) =>{
-                    
-                    let somma_spese = 0;
-                    if(partecipazioni.length >0)
-                        somma_spese = partecipazioni.map(obj => obj.spesa_partecipazione)
-                                   .reduce(function (pre, cur) {
-                                        return pre + cur;
-                                    });
-                    res.message = "Richiesta avvenuta con successo";
-                    res.status_code = 200;
-                    res.status_message = "OK";
-                    res.data = {"spese_totali":somma_spese,
-                                "partecipazioni": partecipazioni};
-                    next();
-                });
-            }
-            else{
-                errorResp = new Error("Operazione non permessa");
-            }
+            user ? next() : next(ErrorMsgEnum.NoPermessi) 
         }
-        if(errorResp instanceof Error)
-            next(errorResp)  
+        else{
+            next(ErrorMsgEnum.BadFormattedData)
+        }
     }catch(error){
-        next(error)
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal)
     }
 };
 /**
@@ -345,85 +204,19 @@ export async function speseEffettuateVal(req:any,res:any,next:any) {
  * @param next passa al prossimo middleware
  */
 export async function statsVal(req:any,res:any,next:any) {
-    let errorResp:any;
     try{
-        if(!formatRequestValidator.validateRawTimeStampFilter(req.body)){
-            errorResp = new Error("Errore di formattazione del payload")
-            res.status_code = 400;
-            res.status_message = "Bad Request";
-        }
-        else{
+        req.body.username = req.user;
+        if(formatRequestValidator.validateRawTimeStampFilter(req.body)){
             const user = await UserClass.userIsAdmin(req.body.username).then((user) => { 
                 return user;
             });
-            if(user){
-
-                //statistiche
-                
-                let data = {
-                    n_aste_completate_successo: 0,
-                    n_aste_terminate_insufficienza_iscritti: 0,
-                    rapporto_puntate_effettuate_puntate_max: 0,
-                };
-
-                //numero aste completate con successo
-                //un asta è completata con successo se l'username del vincitore è diverso da ""
-
-                const { count, rows } = await AstaClass.Asta.findAndCountAll({
-                    raw:true,
-                    where: {
-                        stato:"terminata",
-                        username_vincitore: {
-                          [Op.ne]: ""
-                        },
-                        raggiungimento_min_iscritti: true
-                    }
-                });
-
-                data.n_aste_completate_successo = count;
-
-                //numero aste terminate per insufficienza di iscritti
-                //un asta è terminate per insufficienza di iscritti se raggiungimento_min_iscritti = false
-
-                const {count_aste,rows_aste} = await AstaClass.Asta.findAndCountAll({
-                    where: {
-                        stato:"terminata",
-                        username_vincitore: "",
-                        raggiungimento_min_iscritti: false
-                    }
-                }).then((r) => {
-                        return {
-                          count_aste: r.count,
-                          rows_aste: r.rows
-                        };
-                });
-
-                data.n_aste_terminate_insufficienza_iscritti = count_aste;
-
-                //media del rapporto tra numero di puntate effettuate e numero max di puntate effettuabili
-                
-                if(rows.length==0) data.rapporto_puntate_effettuate_puntate_max = 0
-                else data.rapporto_puntate_effettuate_puntate_max  =
-                               rows.map(obj => obj.num_puntate_totali/(obj.num_attuale_partecipanti*obj.max_n_puntate_partecipante))
-                                   .reduce(function (pre, cur) {
-                                        return pre + cur;
-                                    })/rows.length;
-                
-                res.message = "Richiesta avvenuta con successo";
-                res.status_code = 200;
-                res.status_message = "OK";
-                res.data = {"stats": data};
-                next();
-
-                
-            }
-            else{
-                errorResp = new Error("L'utente deve essere un admin");
-            }
-        } 
-        if(errorResp instanceof Error)
-            next(errorResp) 
+            user ? next() : next(ErrorMsgEnum.NoPermessi);
+        }
+        else{
+            next(ErrorMsgEnum.BadFormattedData)
+        }
     }catch(error){
-        next(error)
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal)
     }
 };

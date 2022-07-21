@@ -5,6 +5,7 @@ import { OBAsta, RaggiungimentoPartecipanti } from "../observer/observer";
 import { subjectList } from "../../index";
 import { Partecipazione } from "./Partecipazione";
 import * as logger from "../utils/logger";
+import { ErrorMsgEnum } from "../msgResponse/ErrorMsg";
 const sequelize: Sequelize = DatabaseSingleton.getInstance().getConnessione();
 
 /**
@@ -152,8 +153,8 @@ export async function validatorInsertAsta(asta:any):Promise<any>{
         if(user) return user;
         else return false;
     });
-    if(!result) return new Error("Utente non esistente");
-    if(result.ruolo !== "bid_creator") return new Error("L'utente deve avere un ruolo bid_creator");
+    if(!result) return ErrorMsgEnum.UtenteNonEsiste;
+    if(result.ruolo !== "bid_creator") return ErrorMsgEnum.NoPermessi;
     return true
 }
 /**
@@ -166,7 +167,7 @@ export async function checkAstaExistence(id_asta:number):Promise<any> {
     try{
         result = await Asta.findByPk(id_asta,{raw:true});
     }catch(error){
-        console.log(error);
+        logger.logError(error.stack)
     }
     return result;
 };

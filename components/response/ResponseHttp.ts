@@ -15,4 +15,8 @@ export class ResponseHttp {
         this.messaggio = httpResponse.getMessage();
         this.data = httpResponse.getData();
     }
+
+    public getStatusCode():number{
+        return this.status_code;
+    }
 }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "870d9d2c-fb66-4703-a8ee-4d39aa62e9b2",
+		"_postman_id": "cac87446-41f9-412c-9139-da3820b25767",
 		"name": "Aste Snap Testing",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -16,13 +16,23 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9jcmVhdG9yIjoiYW5kcmVhX2ZlbGljZXR0aSIsIm5vbWVfb2dnZXR0byI6InNtYXJ0cGhvbmUiLCJtaW5fcGFydGVjaXBhbnRpIjoyLCJtYXhfcGFydGVjaXBhbnRpIjo1LCJxdW90YV9wYXJ0ZWNpcGF6aW9uZSI6NSwiZHVyYXRhX2FzdGFfbWludXRpIjoxLCJpbmNyZW1lbnRvX3B1bnRhdGEiOjUsIm1heF9uX3B1bnRhdGVfcGFydGVjaXBhbnRlIjo1LCJtYXhfcHJlenpvX2FzdGEiOjEyNX0.ZNNWcK8esgy_6JTl8W0Rz3JvoMZdkxYZPuKxG4wfGhk",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX2NyZWF0b3IiLCJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkifQ.l3ujA6GhCI46762IoJvZjtyRcT78HOCtpxib7Y6lLTo",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome_oggetto\": \"pizza\",\n  \"min_partecipanti\": 2,\n  \"max_partecipanti\": 5,\n  \"quota_partecipazione\": 5,\n  \"durata_asta_minuti\": 5,\n  \"incremento_puntata\": 5,\n  \"max_n_puntate_partecipante\": 5,\n  \"max_prezzo_asta\": 125\n}"
+						},
 						"url": {
 							"raw": "localhost:8080/creaAsta",
 							"host": [
@@ -44,13 +54,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9jcmVhdG9yIjoic2FyYV9iaWFuY2hpIiwibm9tZV9vZ2dldHRvIjoib2dnZXR0bzIiLCJtaW5fcGFydGVjaXBhbnRpIjoyLCJtYXhfcGFydGVjaXBhbnRpIjo1LCJxdW90YV9wYXJ0ZWNpcGF6aW9uZSI6NSwiZHVyYXRhX2FzdGFfbWludXRpIjoyLCJpbmNyZW1lbnRvX3B1bnRhdGEiOjgsIm1heF9uX3B1bnRhdGVfcGFydGVjaXBhbnRlIjo1LCJtYXhfcHJlenpvX2FzdGEiOjIwMH0.G1E_2kGkcqBVPX-bfhfVJOvpT1H2R9JbTCEh5KIUFHA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX2NyZWF0b3IiLCJ1c2VybmFtZSI6InNhcmFfYmlhbmNoaSJ9.Ip1QMzvruOgKiUUEQ7LON_y4eEAaNNaev26_cm9psGw",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome_oggetto\": \"pizza2\",\n  \"min_partecipanti\": 3,\n  \"max_partecipanti\": 5,\n  \"quota_partecipazione\": 5,\n  \"durata_asta_minuti\": 1,\n  \"incremento_puntata\": 5,\n  \"max_n_puntate_partecipante\": 5,\n  \"max_prezzo_asta\": 125\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/creaAsta",
 							"host": [
@@ -77,13 +96,28 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_asta\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/partecipaAsta",
 							"host": [
@@ -105,13 +139,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjF9.aeL0PZvTeqCamhg51Y6p_DfTH5aLzgbq68rgrL7PahY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJsdWNyZXppYV9hbnRlbnVjY2kifQ.84DVDLf2moZg4vr9YNHrumzphS4MMNdM0kW8_82Rkd4",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_asta\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/partecipaAsta",
 							"host": [
@@ -133,13 +176,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSIsImlkX2FzdGEiOjF9.scC6cRa2JkrZiRDIYCEQt6C2jRc8xsU0BVdKlmFRMSc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJhZHJpYW5vX21hbmNpbmkifQ.dPyY0IKISunBx3vI1UQQjBGkMCCSIo-i1rQpmHIV7-c",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_asta\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/partecipaAsta",
 							"host": [
@@ -156,96 +208,7 @@
 			]
 		},
 		{
-			"name": "PartecipaAsta(id_asta=2)",
-			"item": [
-				{
-					"name": "PartecipazioneAstaLucrezia",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjJ9.2-xG5lO9JYHP00s9GJUxxPySAq3rgSNutzN9BYxo-34",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/partecipaAsta",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"partecipaAsta"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PartecipazioneAstaSamuele",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6Mn0.KefNqZXgSn1nj_ZqvpLhJUyOG8S3nWaQcesYWV4nD6k",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/partecipaAsta",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"partecipaAsta"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "PartecipazioneAstaAdriano",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSIsImlkX2FzdGEiOjJ9.dl9TY3lHgKEZfcmF4qAFJJvxF9QyJKXiRejebAkYcGg",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/partecipaAsta",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"partecipaAsta"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Rilancio (id_asta=1)",
+			"name": "Rilancio",
 			"item": [
 				{
 					"name": "Rilancio Samuele",
@@ -255,13 +218,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id_asta\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/rilancia",
 							"host": [
@@ -283,13 +255,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjF9.aeL0PZvTeqCamhg51Y6p_DfTH5aLzgbq68rgrL7PahY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJsdWNyZXppYV9hbnRlbnVjY2kifQ.84DVDLf2moZg4vr9YNHrumzphS4MMNdM0kW8_82Rkd4",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_asta\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/rilancia",
 							"host": [
@@ -311,102 +292,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSIsImlkX2FzdGEiOjF9.scC6cRa2JkrZiRDIYCEQt6C2jRc8xsU0BVdKlmFRMSc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJhZHJpYW5vX21hbmNpbmkifQ.dPyY0IKISunBx3vI1UQQjBGkMCCSIo-i1rQpmHIV7-c",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
-						"url": {
-							"raw": "localhost:8080/rilancia",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"rilancia"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Rilancio (id_asta=2)",
-			"item": [
-				{
-					"name": "Rilancio Lucrezia",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjJ9.2-xG5lO9JYHP00s9GJUxxPySAq3rgSNutzN9BYxo-34",
-									"type": "string"
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_asta\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/rilancia",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"rilancia"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Rilancio Samuele",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6Mn0.KefNqZXgSn1nj_ZqvpLhJUyOG8S3nWaQcesYWV4nD6k",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/rilancia",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"rilancia"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "RilancioAdriano",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSIsImlkX2FzdGEiOjJ9.dl9TY3lHgKEZfcmF4qAFJJvxF9QyJKXiRejebAkYcGg",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
 						"url": {
 							"raw": "localhost:8080/rilancia",
 							"host": [
@@ -433,13 +334,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9hZG1pbiI6ImFkbWluIiwidXNlcm5hbWVfZGVzdGluYXRhcmlvIjoic2FtX2xlbGkiLCJxdWFudGl0YSI6MjAwfQ.VJY54ZYYGvcUz3PaU5OxwE0bJlxxOk3kuZO-gfGQqRA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.u2wXyylo7ar0i5gOkJl-QOE7EM5KWXNmh2rhutxx_vI",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username_destinatario\": \"sam_leli\",\n  \"quantita\": 200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/ricaricaUtente",
 							"host": [
@@ -461,13 +371,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9hZG1pbiI6ImFkbWluIiwidXNlcm5hbWVfZGVzdGluYXRhcmlvIjoibHVjcmV6aWFfYW50ZW51Y2NpIiwicXVhbnRpdGEiOjMwMH0.ZZrFBuhzxR0XqR5TJ2qRtD1gfTKlKLR8v7Cl5srWHUM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.u2wXyylo7ar0i5gOkJl-QOE7EM5KWXNmh2rhutxx_vI",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username_destinatario\": \"lucrezia_antenucci\",\n  \"quantita\": 200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/ricaricaUtente",
 							"host": [
@@ -489,13 +408,22 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZV9hZG1pbiI6ImFkbWluIiwidXNlcm5hbWVfZGVzdGluYXRhcmlvIjoiYWRyaWFub19tYW5jaW5pIiwicXVhbnRpdGEiOjIwMH0.DgcDNJg67ejCREk4ZgUq46OtLHxHU0kcuyrAYq_UGtc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.u2wXyylo7ar0i5gOkJl-QOE7EM5KWXNmh2rhutxx_vI",
 									"type": "string"
 								}
 							]
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username_destinatario\": \"adriano_mancini\",\n  \"quantita\": 200\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/ricaricaUtente",
 							"host": [
@@ -516,19 +444,31 @@
 			"item": [
 				{
 					"name": "CreditoResiduoSamuele",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIn0.zYWBd7lBhdu2ApNkdofgbxKX3f-qwhWbf0sqSzh-NkI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/verificaCreditoResiduo",
 							"host": [
@@ -544,19 +484,31 @@
 				},
 				{
 					"name": "CreditoResiduoLucrezia",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSJ9.Si4QatN5BgVfrcWgR84LcGDM_vHRKfkDFsOETJjq26E",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJsdWNyZXppYV9hbnRlbnVjY2kifQ.84DVDLf2moZg4vr9YNHrumzphS4MMNdM0kW8_82Rkd4",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/verificaCreditoResiduo",
 							"host": [
@@ -572,19 +524,31 @@
 				},
 				{
 					"name": "CreditoResiduoAdriano",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSJ9.98qY8HqsSB2T4AL7iF_EeeWPuA_qHGpP8CGHGYiOcz8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJhZHJpYW5vX21hbmNpbmkifQ.dPyY0IKISunBx3vI1UQQjBGkMCCSIo-i1rQpmHIV7-c",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/verificaCreditoResiduo",
 							"host": [
@@ -604,48 +568,32 @@
 			"name": "ElencoRilanci(bid_creator)",
 			"item": [
 				{
-					"name": "ElencoRilanci(id_asta=1)",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkiLCJpZF9hc3RhIjoxfQ.TKpReZ9OvWkWpt8OKAmJYYd09k7DjHQ7zz10MXKiSwc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/elencoRilanci",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"elencoRilanci"
-							]
-						}
+					"name": "ElencoRilanci",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
 					},
-					"response": []
-				},
-				{
-					"name": "ElencoRilanci(id_asta=2)",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhcmFfYmlhbmNoaSIsImlkX2FzdGEiOjJ9.FcG8zTbDBrxz1VsNP_iDlE4K_mZOtWMRl8tVFF5f04w",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX2NyZWF0b3IiLCJ1c2VybmFtZSI6ImFuZHJlYV9mZWxpY2V0dGkifQ.l3ujA6GhCI46762IoJvZjtyRcT78HOCtpxib7Y6lLTo",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id_asta\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/elencoRilanci",
 							"host": [
@@ -665,20 +613,32 @@
 			"name": "ElencoRilanci(bid_partecipant)",
 			"item": [
 				{
-					"name": "ElencoRilanciSamuele(id_asta=1)",
+					"name": "ElencoRilanciSamuele",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiaWRfYXN0YSI6MX0.m1Jg6vNtbM6JZviFr16sqp72T77m4K8KvGlb82bHFII",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"sam_leli\",\n  \"id_asta\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/elencoRilanci",
 							"host": [
@@ -693,20 +653,32 @@
 					"response": []
 				},
 				{
-					"name": "ElencoRilanciLucrezia(id_asta=1)",
+					"name": "ElencoRilanciLucrezia",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImlkX2FzdGEiOjF9.aeL0PZvTeqCamhg51Y6p_DfTH5aLzgbq68rgrL7PahY",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJsdWNyZXppYV9hbnRlbnVjY2kifQ.84DVDLf2moZg4vr9YNHrumzphS4MMNdM0kW8_82Rkd4",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id_asta\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/elencoRilanci",
 							"host": [
@@ -804,19 +776,31 @@
 			"item": [
 				{
 					"name": "speseEffettuateSamuele",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIiwiZGF0YV9pbml6aW8iOiIyMDIyLTA2LTI0VDAxOjAwOjAwKzAxOjAwIiwiZGF0YV9maW5lIjoiMjAyMi0wNy0wN1QxNzowMDowMCswMTowMCJ9.wmnOrkFFvqN4ZOKEMX_e7YiCaoOwtDdZuzCRGudgkZs",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data_inizio\": \"2022-06-24T01:00:00+01:00\",\n  \"data_fine\": \"2022-08-07T17:00:00+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/speseEffettuate",
 							"host": [
@@ -832,19 +816,31 @@
 				},
 				{
 					"name": "speseEffettuateLucrezia",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSIsImRhdGFfaW5pemlvIjoiMjAyMi0wNi0yNFQwMTowMDowMCswMTowMCIsImRhdGFfZmluZSI6IjIwMjItMDctMDdUMTc6MDA6MDArMDE6MDAifQ.6YK44dXwtW6gnbLWiCNlhaFWAXhv5Ba3U2f-EncnHdM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJsdWNyZXppYV9hbnRlbnVjY2kifQ.84DVDLf2moZg4vr9YNHrumzphS4MMNdM0kW8_82Rkd4",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data_inizio\": \"2022-06-24T01:00:00+01:00\",\n  \"data_fine\": \"2022-08-07T17:00:00+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/speseEffettuate",
 							"host": [
@@ -860,19 +856,31 @@
 				},
 				{
 					"name": "speseEffettuateAdriano",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSIsImRhdGFfaW5pemlvIjoiMjAyMi0wNi0yNFQwMTowMDowMCswMTowMCIsImRhdGFfZmluZSI6IjIwMjItMDctMDdUMTc6MDA6MDArMDE6MDAifQ.-VOOhAp1xvYP4y80K_cEh2dQqF6SkkGU56Hq0SJP3Js",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJhZHJpYW5vX21hbmNpbmkifQ.dPyY0IKISunBx3vI1UQQjBGkMCCSIo-i1rQpmHIV7-c",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data_inizio\": \"2022-06-24T01:00:00+01:00\",\n  \"data_fine\": \"2022-08-07T17:00:00+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/speseEffettuate",
 							"host": [
@@ -899,7 +907,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbV9sZWxpIn0.zYWBd7lBhdu2ApNkdofgbxKX3f-qwhWbf0sqSzh-NkI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJzYW1fbGVsaSJ9.M0kBi4e1mKplqkyHRr8VdWNVXGJYDLDCLXEX2m8lqxc",
 									"type": "string"
 								}
 							]
@@ -927,7 +935,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y3JlemlhX2FudGVudWNjaSJ9.Si4QatN5BgVfrcWgR84LcGDM_vHRKfkDFsOETJjq26E",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJsdWNyZXppYV9hbnRlbnVjY2kifQ.84DVDLf2moZg4vr9YNHrumzphS4MMNdM0kW8_82Rkd4",
 									"type": "string"
 								}
 							]
@@ -955,7 +963,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkcmlhbm9fbWFuY2luaSJ9.98qY8HqsSB2T4AL7iF_EeeWPuA_qHGpP8CGHGYiOcz8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJhZHJpYW5vX21hbmNpbmkifQ.dPyY0IKISunBx3vI1UQQjBGkMCCSIo-i1rQpmHIV7-c\n",
 									"type": "string"
 								}
 							]
@@ -982,19 +990,31 @@
 			"item": [
 				{
 					"name": "Stats",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZGF0YV9pbml6aW8iOiIyMDIyLTA2LTI0VDAxOjAwOjAwKzAxOjAwIiwiZGF0YV9maW5lIjoiMjAyMi0wNy0wN1QxNzowMDowMCswMTowMCJ9.YM3PBg8gzeVWgMC05Vv8wJAWnBy9I_N9iV9nnXCx0b8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.u2wXyylo7ar0i5gOkJl-QOE7EM5KWXNmh2rhutxx_vI",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data_inizio\": \"2022-06-24T01:00:00+01:00\",\n  \"data_fine\": \"2022-09-01T17:00:00+01:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/stats",
 							"host": [

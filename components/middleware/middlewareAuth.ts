@@ -1,4 +1,5 @@
 require('dotenv').config();
+import { ErrorMsgEnum } from "../msgResponse/ErrorMsg";
 import * as logger from "../utils/logger";
 const jwt = require('jsonwebtoken');
 /**
@@ -25,11 +26,32 @@ export const checkHeader = (req,res,next) => {
         if(authHeader){
             next();
         } else {
-            let err = new Error("no auth header");
-            next(err);
+            next(ErrorMsgEnum.NoAuthHeader);
         }
     }catch(error){
-        next(error);
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal);
+    }
+};
+/**
+ * Funzione che verifica se è presente il bearerToken JWT
+ * @param req richiesta
+ * @param res risposta
+ * @param next passa al prossimo middleware
+ */
+ export const checkToken = (req,res,next) => {
+    try{
+        const bearerHeader = req.headers.authorization;
+        if(typeof bearerHeader!=='undefined'){
+            const bearerToken = bearerHeader.split(' ')[1];
+            req.token = bearerToken;
+            next();
+        }else{
+            next(ErrorMsgEnum.ErroreDiFirma)
+        }
+    }catch(error){
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal);
     }
 };
 /**
@@ -42,35 +64,21 @@ export const verifyAndAuthenticate = (req,res,next) => {
     try{
         let decoded = jwt.verify(req.token, process.env.SECRET_KEY);
         if(decoded !== null){
-            req.body = decoded;
-            next();
+            if((decoded.role === "admin" || 
+                decoded.role === "bid_partecipant" || 
+                decoded.role === "bid_creator") &&
+                typeof decoded.username === "string"){
+                 req.user = decoded.username
+                 next()
+            } else {
+                next(ErrorMsgEnum.NoPermessi)
+            }
         }else{
-            let error = new Error("Signature Error") 
-            next(error);
+            next(ErrorMsgEnum.ErroreDiFirma)
         }
     }catch(error){
-        next(error);
+        logger.logError(error.stack)
+        next(ErrorMsgEnum.ServerErrorInternal);
     }
 };
 
-/**
- * Funzione che verifica se è presente il bearerToken JWT
- * @param req richiesta
- * @param res risposta
- * @param next passa al prossimo middleware
- */
-export const checkToken = (req,res,next) => {
-    try{
-        const bearerHeader = req.headers.authorization;
-        if(typeof bearerHeader!=='undefined'){
-            const bearerToken = bearerHeader.split(' ')[1];
-            req.token = bearerToken;
-            next();
-        }else{
-            let error = new Error("Signature error") 
-            next(error)
-        }
-    }catch(error){
-        next(error);
-    }
-};

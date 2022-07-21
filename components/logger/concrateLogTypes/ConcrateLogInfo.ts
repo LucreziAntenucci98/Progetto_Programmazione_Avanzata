@@ -37,7 +37,6 @@ export class ConcrateLogInfo implements LogMsg {
             flag: "a+"
         },(err) => {
             if (err) throw err;
-            console.log('Scrittura sul file di log info');
         });
     }
 }

@@ -3,6 +3,7 @@ import { DataTypes, Sequelize } from 'sequelize';
 import { checkUserExistence } from "./User";
 import { checkAstaExistence } from "./Asta";
 import { checkPartecipazioneExistence } from "./Partecipazione";
+import { ErrorMsgEnum } from "../msgResponse/ErrorMsg";
 
 const sequelize: Sequelize = DatabaseSingleton.getInstance().getConnessione();
 
@@ -54,26 +55,26 @@ export async function validatorInsertPuntata(partecipazione:any):Promise<any>{
         else return false;
     });
 
-    if(!user ) return new Error("Utente non esistente");
-    if(user.ruolo !== "bid_partecipant") return new Error("L'utente deve avere il ruolo di bid_partecipant");
+    if(!user ) return ErrorMsgEnum.UtenteNonEsiste;
+    if(user.ruolo !== "bid_partecipant") return ErrorMsgEnum.AstaNoStatoCorretto;
 
     const asta = await checkAstaExistence(partecipazione.id_asta).then((asta) => { 
         if(asta) return asta;
         else return false;
     });
 
-    if(!asta) return new Error("L'asta non esiste");
+    if(!asta) return ErrorMsgEnum.AstaNonEsiste;
 
     const partecipazioneObj = await checkPartecipazioneExistence(partecipazione).then((partecipazione:any) => { 
         if(partecipazione) return partecipazione;
         else return false;
     });
 
-    if(!partecipazioneObj)  return new Error("L'utente non è un partecipante dell'asta");
-    if(partecipazioneObj.length < 1) return new Error("L'utente non è un partecipante dell'asta");
-    if(partecipazioneObj[0].contatore_puntate == asta.max_n_puntate_partecipante) return new Error("L'utente ha raggiunto il numero di puntate massimo");
+    if(!partecipazioneObj)  return ErrorMsgEnum.UtenteNoPartecipante;
+    if(partecipazioneObj[0].contatore_puntate == asta.max_n_puntate_partecipante) 
+        return ErrorMsgEnum.NumeroPuntateMaxRaggiunto;
 
-    if(asta.stato !== "rilancio" ) return new Error("L'asta non è in fase di rilancio"); 
+    if(asta.stato !== "rilancio" ) return ErrorMsgEnum.AstaNoStatoCorretto; 
 
     let resp = await Puntata.findAll({
         where: {
@@ -84,9 +85,9 @@ export async function validatorInsertPuntata(partecipazione:any):Promise<any>{
     });
 
     if((resp.length + 1) * asta.incremento_puntata > asta.max_prezzo_asta) 
-        return new Error("Non puoi puntare perchè è stato raggiunto il prezzo massimo dell'asta");
+        return ErrorMsgEnum.PrezzoMaxAstaRaggiunto;
     if((resp.length + 1) * asta.incremento_puntata > user.credito) 
-        return new Error("Non hai credito sufficiente per rilanciare ancora");
+        return ErrorMsgEnum.NoCredito;
 
     return true;
 }
@@ -137,24 +138,24 @@ export async function visualizzaElencoRilanciVal(req: any):Promise<any>{
         else return false;
     });
     
-    if(!user) return new Error("Utente non esistente");
+    if(!user) return ErrorMsgEnum.UtenteNonEsiste;
     
     const asta = await checkAstaExistence(req.body.id_asta).then((asta) => { 
         if(asta) return asta;
         else return false;
     });
 
-    if(!asta) return new Error("Asta non esistente");
-    if(asta.stato !== "rilancio") return new Error("L'asta non è in fase di rilancio");
+    if(!asta) return ErrorMsgEnum.AstaNonEsiste;
+    if(asta.stato !== "rilancio") return ErrorMsgEnum.AstaNoStatoCorretto;
     if(user.ruolo === "admin") 
-        return new Error("L'utente deve avere un ruolo di bid_partecipant o di bid_creator");
+        return ErrorMsgEnum.NoPermessi;
         
     let puntate;
 
     switch (user.ruolo){
         case "bid_creator":{
             if(asta.username_creator !== req.body.username)
-                return new Error("L'utente con ruolo bid_creator non è il creatore dell'asta");
+                return ErrorMsgEnum.NoPermessi;
             puntate = await getPuntateByIdAsta(req.body.id_asta).then((puntate:any)=>{
                 return puntate; 
             });
@@ -167,7 +168,7 @@ export async function visualizzaElencoRilanciVal(req: any):Promise<any>{
             });
             
             if(!partecipazione[0]) 
-                return new Error("L'utente non ha partecipato all'asta");
+                return ErrorMsgEnum.UtenteNoPartecipante;
             puntate = await getPuntateByIdPartecipazione(partecipazione[0].id_partecipazione).then((puntate:any)=>{
                 return puntate; 
             });
