@@ -1,6 +1,6 @@
 import {Creator} from "../Creator";
 import {LogMsg} from "../LogMsg";
-import {ConcrateLogInfo} from "../concrateLogTypes/ConcrateLogInfo"
+import {ConcrateLogInfo} from "../concreteLogTypes/ConcreteLogInfo"
 /**
 *  Concrete Creators sovrascrive il metodo factory per modificare il
 *  tipo di logger info

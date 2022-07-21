@@ -1,6 +1,6 @@
 import {Creator} from "../Creator"
 import {LogMsg} from "../LogMsg";
-import {ConcrateLogError} from "../concrateLogTypes/ConcrateLogError"
+import {ConcrateLogError} from "../concreteLogTypes/ConcreteLogError"
 
 
 /**
