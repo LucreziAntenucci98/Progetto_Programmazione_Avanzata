@@ -51,7 +51,6 @@ export async function partecipaAsta(req: any, res: any) {
     }
     catch(error) {
         controllerErrors(error,res);
-        controllerErrors(error,res);
     }
 }
 
