@@ -203,12 +203,10 @@ I controlli effettuati sono:
 * se l'utente è bid-creator allora deve essere il creatore dell'asta;
 * se l'utente è bid-partecipant allora deve essere un partecipante all'asta.
 
-Di seguito riportiamo un esempio di payload valido inserito nel body della richiesta in formato JSON:
+Di seguito riportiamo un esempio di URL valido (parametro nella query -> id_asta):
 
 ```bash
-{
-  "id_asta": 1
-}
+localhost:8080/elencoRilanci?id_asta=1
 ```
 Token JWT Valido (bid_creator):
 ```bash
@@ -229,13 +227,9 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5
 Rotta che permette di visualizzare tutte le spese effettuate durante le partecipazioni alle aste in un dato periodo con il ruolo bid-partecipant.
 Il controllo effettuato in questa rotta è stato quello di verificare se l'utente esiste ed ha il ruolo di bid-partecipant.
 
-Di seguito riportiamo un esempio di payload valido inserito nel body della richiesta in formato JSON:
-
+Di seguito riportiamo un esempio di URL valido (parametri nella query -> data_inizio e data_fine):
 ```bash
-{
-  "data_inizio": "2022-06-24T01:00:00+01:00",
-  "data_fine": "2022-07-07T17:00:00+01:00"
-}
+localhost:8080/speseEffettuate?data_inizio=2022-06-24T01:00:00%2B01:00&data_fine=2022-08-07T17:00:00%2B01:00
 ```
 
 Token JWT Valido (bid_partecipant):
@@ -247,12 +241,9 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5
 Rotta per visualizzare le statistiche sulle aste in un dato periodo temporale.
 La verifica che viene effettuata è sull'esistenza e sul ruolo di Admin dell'utente.
 
-Di seguito riportiamo un esempio di payload valido inserito nel body della richiesta in formato JSON:
+Di seguito riportiamo un esempio di URL valido (parametri nella query -> data_inizio e data_fine):
 ```bash
-{
-  "data_inizio": "2022-06-24T01:00:00+01:00",
-  "data_fine": "2022-07-07T17:00:00+01:00"
-}
+localhost:8080/stats?data_inizio=2022-06-24T01:00:00%2B01:00&data_fine=2022-09-01T17:00:00%2B01:00
 ```
 
 Token JWT:
