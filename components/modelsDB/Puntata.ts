@@ -133,14 +133,14 @@ export async function getPuntateByIdPartecipazione(id_partecipazione:number):Pro
  * @returns True se i dati sono inviati correttamente altrimenti False
  */
 export async function visualizzaElencoRilanciVal(req: any):Promise<any>{
-    const user = await checkUserExistence(req.body.username).then((user) => { 
+    const user = await checkUserExistence(req.query.username).then((user) => { 
         if(user) return user;
         else return false;
     });
     
     if(!user) return ErrorMsgEnum.UtenteNonEsiste;
     
-    const asta = await checkAstaExistence(req.body.id_asta).then((asta) => { 
+    const asta = await checkAstaExistence(req.query.id_asta).then((asta) => { 
         if(asta) return asta;
         else return false;
     });
@@ -154,15 +154,15 @@ export async function visualizzaElencoRilanciVal(req: any):Promise<any>{
 
     switch (user.ruolo){
         case "bid_creator":{
-            if(asta.username_creator !== req.body.username)
+            if(asta.username_creator !== req.query.username)
                 return ErrorMsgEnum.NoPermessi;
-            puntate = await getPuntateByIdAsta(req.body.id_asta).then((puntate:any)=>{
+            puntate = await getPuntateByIdAsta(req.query.id_asta).then((puntate:any)=>{
                 return puntate; 
             });
             break;
         }
         case "bid_partecipant":{
-            const partecipazione = await checkPartecipazioneExistence(req.body).then((partecipazione:any)=>{
+            const partecipazione = await checkPartecipazioneExistence(req.query).then((partecipazione:any)=>{
                 if(partecipazione) return partecipazione; 
                 else return false;
             });

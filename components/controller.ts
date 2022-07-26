@@ -104,7 +104,7 @@ export async function ricaricaUtente(req: any, res: any) {
 
 export async function getCreditoResiduo(req: any, res: any) {
     try {
-        const user = await UserClass.userIsBidPartecipant(req.body.username).then((user) => {
+        const user = await UserClass.userIsBidPartecipant(req.query.username).then((user) => {
             return user;
         });
         let data = { "credito": user.credito };
@@ -151,7 +151,7 @@ export async function filtraAsteByStato(req: any, res: any) {
 
 export async function getStoricoAste(req: any, res: any) {
     try {
-        await PartecipazioneClass.getPartecipazioniByUsername(req.body.username).then((result) => {
+        await PartecipazioneClass.getPartecipazioniByUsername(req.query.username).then((result) => {
             let data = {
                 "elenco_aste": {
                     "aste_vinte": result.aste_vinte,
@@ -171,7 +171,7 @@ export async function getStoricoAste(req: any, res: any) {
 
 export async function getSpeseEffettuate(req: any, res: any) {
     try {
-        await PartecipazioneClass.filterPartecipazioniByDate(req.body).then((partecipazioni) => {
+        await PartecipazioneClass.filterPartecipazioniByDate(req.query).then((partecipazioni) => {
             let somma_spese = 0;
             if (partecipazioni.length > 0)
                 somma_spese = partecipazioni.map(obj => obj.spesa_partecipazione)

@@ -98,9 +98,9 @@ export async function ricaricaUtenteVal(req:any,res:any,next:any)  {
  */
 export async function verificaCreditoResiduoVal(req:any,res:any,next:any) {
     try{
-        req.body.username = req.user;
-        if(typeof req.body.username == "string"){
-            const user = await UserClass.userIsBidPartecipant(req.body.username).then((user) => { 
+        req.query.username = req.user;
+        if(typeof req.query.username == "string"){
+            const user = await UserClass.userIsBidPartecipant(req.query.username).then((user) => { 
                 return user;
             });
             user ? next() : next(ErrorMsgEnum.UtenteNonEsiste)
@@ -120,8 +120,9 @@ export async function verificaCreditoResiduoVal(req:any,res:any,next:any) {
  */
 export async function elencoRilanciVal(req:any,res:any,next:any) {
     try{
-        req.body.username = req.user;
-        if(formatRequestValidator.validateRawDataElencoRilanci(req.body)){
+        req.query.username = req.user;
+        req.query.id_asta = parseInt(req.query.id_asta);
+        if(formatRequestValidator.validateRawDataElencoRilanci(req.query)){
             let responseVal = await PuntataClass.visualizzaElencoRilanciVal(req);
             if(typeof responseVal !== "number"){
                 res.data = {"rilanci": responseVal};
@@ -160,9 +161,9 @@ export async function visualizzaAsteByStatoVal(req:any,res:any,next:any) {
  */
 export async function storicoAsteVal(req:any,res:any,next:any) {
     try{
-        req.body.username = req.user;
-        if(typeof req.body.username === "string"){
-            const user = await UserClass.userIsBidPartecipant(req.body.username).then((user) => { 
+        req.query.username = req.user;
+        if(typeof req.query.username === "string"){
+            const user = await UserClass.userIsBidPartecipant(req.query.username).then((user) => { 
                 return user;
             });
             user ? next() : next(ErrorMsgEnum.NoPermessi)
@@ -182,9 +183,9 @@ export async function storicoAsteVal(req:any,res:any,next:any) {
  */
 export async function speseEffettuateVal(req:any,res:any,next:any) {
     try{
-        req.body.username = req.user;
-        if(formatRequestValidator.validateRawTimeStampFilter(req.body)){
-            const user = await UserClass.userIsBidPartecipant(req.body.username).then((user) => { 
+        req.query.username = req.user;
+        if(formatRequestValidator.validateRawTimeStampFilter(req.query)){
+            const user = await UserClass.userIsBidPartecipant(req.query.username).then((user) => { 
                 return user;
             });
             user ? next() : next(ErrorMsgEnum.NoPermessi) 
@@ -205,9 +206,9 @@ export async function speseEffettuateVal(req:any,res:any,next:any) {
  */
 export async function statsVal(req:any,res:any,next:any) {
     try{
-        req.body.username = req.user;
-        if(formatRequestValidator.validateRawTimeStampFilter(req.body)){
-            const user = await UserClass.userIsAdmin(req.body.username).then((user) => { 
+        req.query.username = req.user;
+        if(formatRequestValidator.validateRawTimeStampFilter(req.query)){
+            const user = await UserClass.userIsAdmin(req.query.username).then((user) => { 
                 return user;
             });
             user ? next() : next(ErrorMsgEnum.NoPermessi);

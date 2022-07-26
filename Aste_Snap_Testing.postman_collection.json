@@ -111,7 +111,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_asta\": 5\n}",
+							"raw": "{\n    \"id_asta\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -148,7 +148,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_asta\": 5\n}",
+							"raw": "{\n    \"id_asta\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -185,7 +185,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_asta\": 5\n}",
+							"raw": "{\n    \"id_asta\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -227,7 +227,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id_asta\": 5\n}",
+							"raw": "{\n  \"id_asta\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -264,7 +264,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_asta\": 5\n}",
+							"raw": "{\n    \"id_asta\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -301,7 +301,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_asta\": 5\n}",
+							"raw": "{\n    \"id_asta\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -380,7 +380,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"username_destinatario\": \"lucrezia_antenucci\",\n  \"quantita\": 200\n}",
+							"raw": "{\n  \"username_destinatario\": \"lucrezia_antenucci\",\n  \"quantita\": 300\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -444,9 +444,6 @@
 			"item": [
 				{
 					"name": "CreditoResiduoSamuele",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -460,15 +457,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "localhost:8080/verificaCreditoResiduo",
 							"host": [
@@ -484,9 +472,6 @@
 				},
 				{
 					"name": "CreditoResiduoLucrezia",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -500,15 +485,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "localhost:8080/verificaCreditoResiduo",
 							"host": [
@@ -524,9 +500,6 @@
 				},
 				{
 					"name": "CreditoResiduoAdriano",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -540,15 +513,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "localhost:8080/verificaCreditoResiduo",
 							"host": [
@@ -569,9 +533,6 @@
 			"item": [
 				{
 					"name": "ElencoRilanci",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -585,23 +546,20 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"id_asta\": 5\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/elencoRilanci",
+							"raw": "localhost:8080/elencoRilanci?id_asta=1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"elencoRilanci"
+							],
+							"query": [
+								{
+									"key": "id_asta",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -614,9 +572,6 @@
 			"item": [
 				{
 					"name": "ElencoRilanciSamuele",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -630,23 +585,20 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"username\": \"sam_leli\",\n  \"id_asta\": 5\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/elencoRilanci",
+							"raw": "localhost:8080/elencoRilanci?id_asta=1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"elencoRilanci"
+							],
+							"query": [
+								{
+									"key": "id_asta",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -654,9 +606,6 @@
 				},
 				{
 					"name": "ElencoRilanciLucrezia",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -670,23 +619,20 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"id_asta\": 5\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/elencoRilanci",
+							"raw": "localhost:8080/elencoRilanci?id_asta=1",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"elencoRilanci"
+							],
+							"query": [
+								{
+									"key": "id_asta",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -776,9 +722,6 @@
 			"item": [
 				{
 					"name": "speseEffettuateSamuele",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -792,23 +735,29 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"data_inizio\": \"2022-06-24T01:00:00+01:00\",\n  \"data_fine\": \"2022-08-07T17:00:00+01:00\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/speseEffettuate",
+							"raw": "localhost:8080/speseEffettuate?data_inizio=2022-06-24T01:00:00%2B01:00&data_fine=2022-08-07T17:00:00%2B01:00",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"speseEffettuate"
+							],
+							"query": [
+								{
+									"key": "data_inizio",
+									"value": "2022-06-24T01:00:00%2B01:00"
+								},
+								{
+									"key": "data_fine",
+									"value": "2022-08-07T17:00:00%2B01:00"
+								},
+								{
+									"key": "username",
+									"value": "sam_leli",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -816,9 +765,6 @@
 				},
 				{
 					"name": "speseEffettuateLucrezia",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -832,23 +778,24 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"data_inizio\": \"2022-06-24T01:00:00+01:00\",\n  \"data_fine\": \"2022-08-07T17:00:00+01:00\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/speseEffettuate",
+							"raw": "localhost:8080/speseEffettuate?data_inizio=2022-06-24T01:00:00%2B01:00&data_fine=2022-08-07T17:00:00%2B01:00",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"speseEffettuate"
+							],
+							"query": [
+								{
+									"key": "data_inizio",
+									"value": "2022-06-24T01:00:00%2B01:00"
+								},
+								{
+									"key": "data_fine",
+									"value": "2022-08-07T17:00:00%2B01:00"
+								}
 							]
 						}
 					},
@@ -856,9 +803,6 @@
 				},
 				{
 					"name": "speseEffettuateAdriano",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -872,23 +816,24 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"data_inizio\": \"2022-06-24T01:00:00+01:00\",\n  \"data_fine\": \"2022-08-07T17:00:00+01:00\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/speseEffettuate",
+							"raw": "localhost:8080/speseEffettuate?data_inizio=2022-06-24T01:00:00%2B01:00&data_fine=2022-08-07T17:00:00%2B01:00",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"speseEffettuate"
+							],
+							"query": [
+								{
+									"key": "data_inizio",
+									"value": "2022-06-24T01:00:00%2B01:00"
+								},
+								{
+									"key": "data_fine",
+									"value": "2022-08-07T17:00:00%2B01:00"
+								}
 							]
 						}
 					},
@@ -963,7 +908,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJhZHJpYW5vX21hbmNpbmkifQ.dPyY0IKISunBx3vI1UQQjBGkMCCSIo-i1rQpmHIV7-c\n",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmlkX3BhcnRlY2lwYW50IiwidXNlcm5hbWUiOiJhZHJpYW5vX21hbmNpbmkifQ.dPyY0IKISunBx3vI1UQQjBGkMCCSIo-i1rQpmHIV7-c",
 									"type": "string"
 								}
 							]
@@ -990,9 +935,6 @@
 			"item": [
 				{
 					"name": "Stats",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1006,23 +948,24 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"data_inizio\": \"2022-06-24T01:00:00+01:00\",\n  \"data_fine\": \"2022-09-01T17:00:00+01:00\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/stats",
+							"raw": "localhost:8080/stats?data_inizio=2022-06-24T01:00:00%2B01:00&data_fine=2022-09-01T17:00:00%2B01:00",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"stats"
+							],
+							"query": [
+								{
+									"key": "data_inizio",
+									"value": "2022-06-24T01:00:00%2B01:00"
+								},
+								{
+									"key": "data_fine",
+									"value": "2022-09-01T17:00:00%2B01:00"
+								}
 							]
 						}
 					},
